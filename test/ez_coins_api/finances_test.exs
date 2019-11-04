@@ -63,4 +63,67 @@ defmodule EzCoinsApi.FinancesTest do
       assert %Ecto.Changeset{} = Finances.change_donation(donation)
     end
   end
+
+  describe "wallets" do
+    alias EzCoinsApi.Finances.Wallet
+
+    @valid_attrs %{balance: 42, received: 42, to_offer: 42}
+    @update_attrs %{balance: 43, received: 43, to_offer: 43}
+    @invalid_attrs %{balance: nil, received: nil, to_offer: nil}
+
+    def wallet_fixture(attrs \\ %{}) do
+      {:ok, wallet} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Finances.create_wallet()
+
+      wallet
+    end
+
+    test "list_wallets/0 returns all wallets" do
+      wallet = wallet_fixture()
+      assert Finances.list_wallets() == [wallet]
+    end
+
+    test "get_wallet!/1 returns the wallet with given id" do
+      wallet = wallet_fixture()
+      assert Finances.get_wallet!(wallet.id) == wallet
+    end
+
+    test "create_wallet/1 with valid data creates a wallet" do
+      assert {:ok, %Wallet{} = wallet} = Finances.create_wallet(@valid_attrs)
+      assert wallet.balance == 42
+      assert wallet.received == 42
+      assert wallet.to_offer == 42
+    end
+
+    test "create_wallet/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Finances.create_wallet(@invalid_attrs)
+    end
+
+    test "update_wallet/2 with valid data updates the wallet" do
+      wallet = wallet_fixture()
+      assert {:ok, %Wallet{} = wallet} = Finances.update_wallet(wallet, @update_attrs)
+      assert wallet.balance == 43
+      assert wallet.received == 43
+      assert wallet.to_offer == 43
+    end
+
+    test "update_wallet/2 with invalid data returns error changeset" do
+      wallet = wallet_fixture()
+      assert {:error, %Ecto.Changeset{}} = Finances.update_wallet(wallet, @invalid_attrs)
+      assert wallet == Finances.get_wallet!(wallet.id)
+    end
+
+    test "delete_wallet/1 deletes the wallet" do
+      wallet = wallet_fixture()
+      assert {:ok, %Wallet{}} = Finances.delete_wallet(wallet)
+      assert_raise Ecto.NoResultsError, fn -> Finances.get_wallet!(wallet.id) end
+    end
+
+    test "change_wallet/1 returns a wallet changeset" do
+      wallet = wallet_fixture()
+      assert %Ecto.Changeset{} = Finances.change_wallet(wallet)
+    end
+  end
 end
