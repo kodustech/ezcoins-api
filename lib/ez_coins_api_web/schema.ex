@@ -8,6 +8,10 @@ defmodule EzCoinsApiWeb.Schema do
   import_types(EzCoinsApiWeb.Schema.Types)
 
   query do
+    field :donations, list_of(:donation_type) do
+      resolve(&Resolvers.DonationResolver.donations/3)
+    end
+
     field :users, list_of(:user_type) do
       resolve(&Resolvers.UserResolver.users/3)
     end
