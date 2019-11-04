@@ -30,8 +30,11 @@ defmodule EzCoinsApi.Accounts.User do
         changes: %{
           password: password
         }
-      } -> change(changeset, Argon2.add_hash(password))
-      _ -> changeset
+      } ->
+        change(changeset, Argon2.add_hash(password))
+
+      _ ->
+        changeset
     end
   end
 end
