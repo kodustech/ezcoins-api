@@ -1,21 +1,21 @@
 defmodule EzCoinsApiWeb.Resolvers.DonationResolver do
   @moduledoc false
 
-  alias EzCoinsApi.{Accounts, Bank}
+  alias EzCoinsApi.{Accounts, Finances}
 
   def donate(_, %{input: input}, %{context: context}) do
-    Bank.create_donation(Map.put(input, :sender, context.current_user.id))
+    Finances.create_donation(Map.put(input, :sender_user_id, context.current_user.id))
   end
 
   def donations(_, _, _) do
-    {:ok, Bank.list_donations()}
+    {:ok, Finances.list_donations()}
   end
 
-  def receiver(%{receiver: receiver}, _, _) do
-    {:ok, Accounts.get_user!(receiver)}
+  def receiver(%{receiver_user_id: receiver_user_id}, _, _) do
+    {:ok, Accounts.get_user!(receiver_user_id)}
   end
 
-  def sender(%{sender: sender}, _, _) do
-    {:ok, Accounts.get_user!(sender)}
+  def sender(%{sender_user_id: sender_user_id}, _, _) do
+    {:ok, Accounts.get_user!(sender_user_id)}
   end
 end

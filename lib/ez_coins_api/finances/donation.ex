@@ -14,8 +14,8 @@ defmodule EzCoinsApi.Finances.Donation do
   @doc false
   def changeset(donation, attrs) do
     donation
-    |> cast(attrs, [:quantity, :reason, :receiver_user_id])
-    |> validate_required([:quantity, :reason, :receiver_user_id])
+    |> cast(attrs, [:quantity, :reason, :receiver_user_id, :sender_user_id])
+    |> validate_required([:quantity, :reason, :receiver_user_id, :sender_user_id])
     |> validate_number(:quantity, greater_than: 0)
     |> validate_length(:reason, min: 5)
   end
