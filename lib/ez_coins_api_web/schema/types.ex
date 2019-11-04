@@ -5,5 +5,6 @@ defmodule EzCoinsApiWeb.Schema.Types do
 
   alias EzCoinsApiWeb.Schema.Types
 
+  import_types(Types.AuthType)
   import_types(Types.UserType)
 end
