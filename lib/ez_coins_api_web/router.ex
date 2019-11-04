@@ -3,6 +3,7 @@ defmodule EzCoinsApiWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug(EzCoinsApiWeb.Plugs.Context)
   end
 
   scope "/" do
