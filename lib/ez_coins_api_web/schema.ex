@@ -18,5 +18,10 @@ defmodule EzCoinsApiWeb.Schema do
       arg(:input, non_null(:user_input_type))
       resolve(&Resolvers.UserResolver.create/3)
     end
+
+    field :login, type: :auth_type do
+      arg(:input, non_null(:auth_input_type))
+      resolve(&Resolvers.AuthResolver.login/3)
+    end
   end
 end

@@ -22,6 +22,10 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :ez_coins_api, EzCoinsApi.Guardian,
+  issuer: "ez_coins_api",
+  secret_key: "TP8wv4wFTkFmk68CL5nz+ewjkpzBQEtYl+SGdqBlaqnWTzfvdyA3FIZksc8okRiA"
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
