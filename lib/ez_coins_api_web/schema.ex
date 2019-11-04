@@ -19,6 +19,11 @@ defmodule EzCoinsApiWeb.Schema do
       resolve(&Resolvers.UserResolver.create/3)
     end
 
+    field :donate, type: :donation_type do
+      arg(:input, non_null(:donation_input_type))
+      resolve(&Resolvers.DonationResolver.donate/3)
+    end
+
     field :login, type: :auth_type do
       arg(:input, non_null(:auth_input_type))
       resolve(&Resolvers.AuthResolver.login/3)
