@@ -3,7 +3,7 @@ defmodule EzCoinsApi.Guardian do
 
   alias EzCoinsApi.Accounts
 
-  def subject_for_token(user, _claims) do
+  def subject_for_token(%Accounts.User{} = user, _claims) do
     sub = to_string(user.id)
     {:ok, sub}
   end
@@ -12,12 +12,11 @@ defmodule EzCoinsApi.Guardian do
     {:error, :reason_for_error}
   end
 
-  def resource_from_claims(claims) do
-    user =
-      claims["sub"]
-      |> Accounts.get_user!()
-
-    {:ok, user}
+  def resource_from_claims(%{"sub" => id}) do
+    case Accounts.get_user!(id) do
+      nil -> {:error, :resource_not_found}
+      user -> {:ok, user}
+    end
   end
 
   def resource_from_claims(_claims) do
