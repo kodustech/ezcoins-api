@@ -12,4 +12,11 @@ defmodule EzCoinsApiWeb.Schema do
       resolve(&Resolvers.UserResolver.users/3)
     end
   end
+
+  mutation do
+    field :create_user, type: :user_type do
+      arg(:input, non_null(:user_input_type))
+      resolve(&Resolvers.UserResolver.create/3)
+    end
+  end
 end
