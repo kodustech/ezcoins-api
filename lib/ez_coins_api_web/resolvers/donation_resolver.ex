@@ -7,6 +7,10 @@ defmodule EzCoinsApiWeb.Resolvers.DonationResolver do
     Bank.create_donation(Map.put(input, :sender, context.current_user.id))
   end
 
+  def donations(_, _, _) do
+    {:ok, Bank.list_donations()}
+  end
+
   def receiver(%{receiver: receiver}, _, _) do
     {:ok, Accounts.get_user!(receiver)}
   end
