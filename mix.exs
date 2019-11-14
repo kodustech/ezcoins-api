@@ -45,7 +45,8 @@ defmodule EzCoinsApi.MixProject do
       {:absinthe, "~> 1.4"},
       {:absinthe_ecto, "~> 0.1.3"},
       {:absinthe_plug, "~> 1.4"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:cors_plug, "~> 2.0"}
     ]
   end
 
