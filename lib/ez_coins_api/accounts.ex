@@ -3,10 +3,13 @@ defmodule EzCoinsApi.Accounts do
   The Accounts context.
   """
 
+  alias Ecto.Multi
+
   import Ecto.Query, warn: false
   alias EzCoinsApi.Repo
 
   alias EzCoinsApi.Accounts.User
+  alias EzCoinsApi.Finances.Wallet
 
   @doc """
   Returns the list of users.
@@ -55,9 +58,12 @@ defmodule EzCoinsApi.Accounts do
 
   """
   def create_user(attrs \\ %{}) do
-    %User{}
-    |> User.changeset(attrs)
-    |> Repo.insert()
+    Multi.new()
+    |> Multi.insert(:user, User.changeset(%User{}, attrs))
+    |> Multi.run(:wallet, fn repo, %{user: user} ->
+      repo.insert(Wallet.changeset(%Wallet{}, %{owner_user_id: user.id}))
+    end)
+    |> Repo.transaction()
   end
 
   @doc """

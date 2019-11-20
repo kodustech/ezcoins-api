@@ -3,9 +3,9 @@ defmodule EzCoinsApi.Finances.Wallet do
   import Ecto.Changeset
 
   schema "wallets" do
-    field :balance, :integer
-    field :received, :integer
-    field :to_offer, :integer
+    field :balance, :integer, default: 0
+    field :received, :integer, default: 0
+    field :to_offer, :integer, default: 0
     field :owner_user_id, :id
 
     timestamps()
@@ -14,7 +14,7 @@ defmodule EzCoinsApi.Finances.Wallet do
   @doc false
   def changeset(wallet, attrs) do
     wallet
-    |> cast(attrs, [:to_offer, :received, :balance])
-    |> validate_required([:to_offer, :received, :balance])
+    |> cast(attrs, [:balance, :received, :to_offer, :owner_user_id])
+    |> validate_required([:owner_user_id])
   end
 end
