@@ -13,6 +13,7 @@ defmodule EzCoinsApiWeb.Schema do
     end
 
     field :users, list_of(:user_type) do
+      arg(:except_me, :boolean)
       resolve(&Resolvers.UserResolver.users/3)
     end
   end

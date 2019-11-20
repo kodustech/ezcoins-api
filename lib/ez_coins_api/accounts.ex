@@ -21,6 +21,11 @@ defmodule EzCoinsApi.Accounts do
     Repo.all(User)
   end
 
+  def list_users_except_id(id) do
+    from(u in User, where: u.id != ^id)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single user.
 
