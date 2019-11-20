@@ -11,6 +11,27 @@ defmodule EzCoinsApiWeb.Resolvers.UserResolver do
   end
 
   def create(_, %{input: input}, _) do
-    Accounts.create_user(input)
+    with {:ok, result} <- Accounts.create_user(input),
+         %{user: user, wallet: wallet} <- result do
+      {:ok, Map.put(user, :wallet, wallet)}
+    else
+      {:error, :user, changeset, %{}} ->
+        error_value =
+          changeset.errors
+          |> Enum.map(fn {key, {value, context}} ->
+            details =
+              context
+              |> Enum.map(fn {a, b} ->
+                %{"#{a}": b}
+              end)
+
+            [message: "#{key} #{value}", details: details]
+          end)
+
+        {:error, error_value}
+
+      _ ->
+        {:error, nil}
+    end
   end
 end
