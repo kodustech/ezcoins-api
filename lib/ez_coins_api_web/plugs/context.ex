@@ -20,7 +20,7 @@ defmodule EzCoinsApiWeb.Plugs.Context do
          {:ok, user} <- Guardian.resource_from_claims(claims) do
       %{current_user: user}
     else
-      _ -> %{sad: true}
+      _ -> %{}
     end
   end
 end
