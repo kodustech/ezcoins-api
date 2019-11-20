@@ -7,12 +7,9 @@ defmodule EzCoinsApiWeb.Schema.Types.DonationType do
 
   object :donation_type do
     field(:id, :id)
-
-    field(
-      :sender,
-      :user_type,
-      resolve: &DonationResolver.sender/3
-    )
+    field(:donate_at, :string)
+    field(:quantity, :integer)
+    field(:reason, :string)
 
     field(
       :receiver,
@@ -20,13 +17,17 @@ defmodule EzCoinsApiWeb.Schema.Types.DonationType do
       resolve: &DonationResolver.receiver/3
     )
 
-    field(:quantity, :integer)
-    field(:reason, :string)
+    field(
+      :sender,
+      :user_type,
+      resolve: &DonationResolver.sender/3
+    )
   end
 
   input_object :donation_input_type do
-    field(:receiver_user_id, :integer)
+    field(:donate_at, :string)
     field(:quantity, :integer)
     field(:reason, :string)
+    field(:receiver_user_id, :id)
   end
 end
