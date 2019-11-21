@@ -1,10 +1,14 @@
 defmodule EzCoinsApiWeb.Schema.Types.UserType do
   @moduledoc false
+
   use Absinthe.Schema.Notation
+
+  alias EzCoinsApiWeb.Resolvers.UserResolver
 
   object :user_type do
     field(:id, :id)
     field(:email, :string)
+    field(:wallet, :wallet_type, resolve: &UserResolver.wallet/3)
   end
 
   input_object :user_input_type do
