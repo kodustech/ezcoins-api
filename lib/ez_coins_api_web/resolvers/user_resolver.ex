@@ -2,6 +2,11 @@ defmodule EzCoinsApiWeb.Resolvers.UserResolver do
   @moduledoc false
 
   alias EzCoinsApi.Accounts
+  alias EzCoinsApi.Finances
+
+  def user(_, %{id: id}, _) do
+    {:ok, Accounts.get_user!(id)}
+  end
 
   def users(_, args, %{context: context}) do
     case args do
@@ -33,5 +38,9 @@ defmodule EzCoinsApiWeb.Resolvers.UserResolver do
       _ ->
         {:error, nil}
     end
+  end
+
+  def wallet(%{id: id}, _, _) do
+    {:ok, Finances.get_wallet_by_owner!(id)}
   end
 end
