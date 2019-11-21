@@ -53,13 +53,13 @@ defmodule EzCoinsApi.Finances do
 
   """
   def create_donation(attrs \\ %{}) do
-    sender_wallet = Repo.get_by(Wallet, owner_user_id: attrs.sender_user_id)
+    sender_wallet = get_wallet_by_owner!(attrs.sender_user_id)
 
     if sender_wallet.to_offer < attrs.quantity do
       raise "Insufficient balance to offer"
     end
 
-    receiver_wallet = Repo.get_by(Wallet, owner_user_id: attrs.receiver_user_id)
+    receiver_wallet = get_wallet_by_owner!(attrs.receiver_user_id)
 
     Multi.new()
     |> Multi.insert(:donation, Donation.changeset(%Donation{}, attrs))
@@ -152,6 +152,10 @@ defmodule EzCoinsApi.Finances do
 
   """
   def get_wallet!(id), do: Repo.get!(Wallet, id)
+
+  def get_wallet_by_owner!(id) do
+    Repo.get_by!(Wallet, owner_user_id: id)
+  end
 
   @doc """
   Creates a wallet.
