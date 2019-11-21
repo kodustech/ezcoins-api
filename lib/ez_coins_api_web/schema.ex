@@ -12,6 +12,11 @@ defmodule EzCoinsApiWeb.Schema do
       resolve(&Resolvers.DonationResolver.donations/3)
     end
 
+    field :user, :user_type do
+      arg(:id, :id)
+      resolve(&Resolvers.UserResolver.user/3)
+    end
+
     field :users, list_of(:user_type) do
       arg(:except_me, :boolean)
       resolve(&Resolvers.UserResolver.users/3)
