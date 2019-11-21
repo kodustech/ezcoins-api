@@ -4,7 +4,11 @@ defmodule EzCoinsApiWeb.Resolvers.DonationResolver do
   alias EzCoinsApi.{Accounts, Finances}
 
   def donate(_, %{input: input}, %{context: context}) do
-    Finances.create_donation(Map.put(input, :sender_user_id, context.current_user.id))
+    attrs = Map.put(input, :sender_user_id, context.current_user.id)
+    with {:ok, result} <- Finances.create_donation(attrs),
+         %{donation: donation} <- result do
+      {:ok, donation}
+    end
   end
 
   def donations(_, _, _) do
