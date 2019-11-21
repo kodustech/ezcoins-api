@@ -3,10 +3,13 @@ defmodule EzCoinsApi.Finances do
   The Finances context.
   """
 
+  alias Ecto.{Changeset, Multi}
+
   import Ecto.Query, warn: false
   alias EzCoinsApi.Repo
 
   alias EzCoinsApi.Finances.Donation
+  alias EzCoinsApi.Finances.Wallet
 
   @doc """
   Returns the list of donations.
@@ -50,9 +53,28 @@ defmodule EzCoinsApi.Finances do
 
   """
   def create_donation(attrs \\ %{}) do
-    %Donation{}
-    |> Donation.changeset(attrs)
-    |> Repo.insert()
+    sender_wallet = Repo.get_by(Wallet, owner_user_id: attrs.sender_user_id)
+
+    if sender_wallet.to_offer < attrs.quantity do
+      raise "Insufficient balance to offer"
+    end
+
+    receiver_wallet = Repo.get_by(Wallet, owner_user_id: attrs.receiver_user_id)
+
+    Multi.new()
+    |> Multi.insert(:donation, Donation.changeset(%Donation{}, attrs))
+    |> Multi.update(
+      :sender_wallet,
+      Changeset.change(sender_wallet, to_offer: sender_wallet.to_offer - attrs.quantity)
+    )
+    |> Multi.update(
+      :receiver_wallet,
+      Changeset.change(receiver_wallet,
+        received: receiver_wallet.received + attrs.quantity,
+        balance: receiver_wallet.balance + attrs.quantity
+      )
+    )
+    |> Repo.transaction()
   end
 
   @doc """
@@ -101,8 +123,6 @@ defmodule EzCoinsApi.Finances do
   def change_donation(%Donation{} = donation) do
     Donation.changeset(donation, %{})
   end
-
-  alias EzCoinsApi.Finances.Wallet
 
   @doc """
   Returns the list of wallets.
