@@ -3,10 +3,12 @@ defmodule EzCoinsApi.Accounts.User do
   import Ecto.Changeset
 
   schema "users" do
+    field :name, :string
     field :email, :string
     field :password_hash, :string
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
+    field :avatar, :string
 
     timestamps()
   end
@@ -14,8 +16,8 @@ defmodule EzCoinsApi.Accounts.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password, :password_confirmation])
-    |> validate_required([:email, :password, :password_confirmation])
+    |> cast(attrs, [:name, :email, :password, :password_confirmation, :avatar])
+    |> validate_required([:name, :email, :password, :password_confirmation, :avatar])
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 6, max: 50)
     |> validate_confirmation(:password)
