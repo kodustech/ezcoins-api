@@ -1,6 +1,14 @@
 defmodule EzCoinsApiWeb.UserSocket do
   use Phoenix.Socket
 
+  use Absinthe.Phoenix.Socket,
+    schema: EzCoinsApiWeb.Schema
+
+  alias Absinthe.Phoenix.Socket
+  alias EzCoinsApi.Guardian
+
+  transport(:websocket, Phoenix.Transports.WebSocket)
+
   ## Channels
   # channel "room:*", EzCoinsApiWeb.RoomChannel
 
@@ -15,8 +23,27 @@ defmodule EzCoinsApiWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket, _connect_info) do
+  def connect(params, socket, _connect_info) do
+    current_user = current_user(params)
+
+    socket =
+      Socket.put_options(socket,
+        context: %{
+          current_user: current_user
+        }
+      )
+
     {:ok, socket}
+  end
+
+  defp current_user(params) do
+    with "Bearer " <> token <- Map.get(params, "authorization"),
+         {:ok, claims} <- Guardian.decode_and_verify(token),
+         {:ok, user} <- Guardian.resource_from_claims(claims) do
+      user
+    else
+      _ -> %{}
+    end
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
