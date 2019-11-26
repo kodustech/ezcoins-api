@@ -13,7 +13,10 @@ defmodule EzCoinsApiWeb.Router do
     forward("/graphql", Absinthe.Plug, schema: EzCoinsApiWeb.Schema)
 
     if Mix.env() == :dev do
-      forward("/graphiql", Absinthe.Plug.GraphiQL, schema: EzCoinsApiWeb.Schema)
+      forward("/graphiql", Absinthe.Plug.GraphiQL,
+        schema: EzCoinsApiWeb.Schema,
+        interface: :playground
+      )
     end
   end
 end
