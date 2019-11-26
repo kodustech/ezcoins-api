@@ -1,8 +1,6 @@
 defmodule EzCoinsApi.Accounts.Auth do
   @moduledoc false
 
-  import Argon2, only: [check_pass: 2]
-
   alias EzCoinsApi.Accounts.User
   alias EzCoinsApi.Repo
 
