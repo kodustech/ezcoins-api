@@ -1,5 +1,6 @@
 defmodule EzCoinsApiWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :ez_coins_api
+  use Absinthe.Phoenix.Endpoint
 
   socket "/socket", EzCoinsApiWeb.UserSocket,
     websocket: true,

@@ -39,4 +39,21 @@ defmodule EzCoinsApiWeb.Schema do
       resolve(&Resolvers.AuthResolver.login/3)
     end
   end
+
+  subscription do
+    field :donation_done, :donation_type do
+      config(fn _, %{context: context} ->
+        case context.current_user do
+          %{id: id} -> {:ok, topic: id}
+          _ -> {:error, 'unauthorized'}
+        end
+      end)
+
+      trigger(:donate,
+        topic: fn donation ->
+          [donation.sender_user_id]
+        end
+      )
+    end
+  end
 end
