@@ -56,4 +56,8 @@ defmodule EzCoinsApiWeb.Schema do
       )
     end
   end
+
+  def middleware(middleware, _field, _object) do
+    middleware ++ [EzCoinsApiWeb.Middlewares.HandleChangesetErrors]
+  end
 end
