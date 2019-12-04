@@ -9,6 +9,8 @@ defmodule EzCoinsApiWeb.Resolvers.DonationResolver do
     with {:ok, result} <- Finances.create_donation(attrs),
          %{donation: donation} <- result do
       {:ok, donation}
+    else
+      {:error, name, changeset, %{}} -> {:error, changeset}
     end
   end
 
