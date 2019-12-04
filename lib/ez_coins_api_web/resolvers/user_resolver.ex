@@ -20,23 +20,7 @@ defmodule EzCoinsApiWeb.Resolvers.UserResolver do
          %{user: user, wallet: wallet} <- result do
       {:ok, Map.put(user, :wallet, wallet)}
     else
-      {:error, :user, changeset, %{}} ->
-        error_value =
-          changeset.errors
-          |> Enum.map(fn {key, {value, context}} ->
-            details =
-              context
-              |> Enum.map(fn {a, b} ->
-                %{"#{a}": b}
-              end)
-
-            [message: "#{key} #{value}", details: details]
-          end)
-
-        {:error, error_value}
-
-      _ ->
-        {:error, nil}
+      {:error, name, changeset, %{}} -> {:error, changeset}
     end
   end
 
