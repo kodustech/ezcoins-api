@@ -9,20 +9,41 @@ defmodule EzCoinsApi.Accounts.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     field :avatar, :string
+    field :hired_at, :date
+    field :resigned_at, :date
 
     timestamps()
   end
 
-  @doc false
   def changeset(user, attrs) do
-    user
-    |> cast(attrs, [:name, :email, :password, :password_confirmation, :avatar])
-    |> validate_required([:name, :email, :password, :password_confirmation, :avatar])
-    |> validate_format(:email, ~r/@/)
-    |> validate_length(:password, min: 6, max: 50)
-    |> validate_confirmation(:password)
-    |> unique_constraint(:email)
-    |> hash_password
+    case attrs do
+      %{resigned_at: _resigned_at} ->
+        user
+        |> change
+        |> validate_not_resigned
+        |> cast(attrs, [:resigned_at])
+        |> validate_required([:resigned_at])
+
+      _ ->
+        user
+        |> cast(attrs, [:name, :email, :password, :password_confirmation, :avatar])
+        |> validate_required([:name, :email, :password, :password_confirmation, :avatar])
+        |> validate_format(:email, ~r/@/)
+        |> validate_length(:password, min: 6, max: 50)
+        |> validate_confirmation(:password)
+        |> unique_constraint(:email)
+        |> hash_password
+    end
+  end
+
+  defp validate_not_resigned(changeset) do
+    case get_field(changeset, :resigned_at) do
+      nil ->
+        changeset
+
+      resigned_at ->
+        add_error(changeset, :resigned_at, "user is already resigned at #{resigned_at}")
+    end
   end
 
   defp hash_password(changeset) do
