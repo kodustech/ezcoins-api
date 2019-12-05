@@ -10,6 +10,8 @@ defmodule EzCoinsApiWeb.Schema.Types.UserType do
     field(:name, :string)
     field(:email, :string)
     field(:avatar, :string)
+    field(:hired_at, :string)
+    field(:resigned_at, :string)
     field(:wallet, :wallet_type, resolve: &UserResolver.wallet/3)
   end
 
@@ -19,5 +21,11 @@ defmodule EzCoinsApiWeb.Schema.Types.UserType do
     field(:password, non_null(:string))
     field(:password_confirmation, non_null(:string))
     field(:avatar, :string)
+    field(:hired_at, :string)
+  end
+
+  input_object :resign_user_input_type do
+    field(:id, non_null(:id))
+    field(:resigned_at, non_null(:string))
   end
 end

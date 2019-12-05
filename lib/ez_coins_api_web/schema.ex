@@ -38,6 +38,11 @@ defmodule EzCoinsApiWeb.Schema do
       arg(:input, non_null(:auth_input_type))
       resolve(&Resolvers.AuthResolver.login/3)
     end
+
+    field :resign_user, type: :user_type do
+      arg(:input, non_null(:resign_user_input_type))
+      resolve(&Resolvers.UserResolver.resign/3)
+    end
   end
 
   subscription do
