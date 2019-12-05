@@ -10,7 +10,7 @@ defmodule EzCoinsApiWeb.Resolvers.DonationResolver do
          %{donation: donation} <- result do
       {:ok, donation}
     else
-      {:error, name, changeset, %{}} -> {:error, changeset}
+      {:error, _name, changeset, %{}} -> {:error, changeset}
     end
   end
 

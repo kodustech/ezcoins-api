@@ -20,8 +20,13 @@ defmodule EzCoinsApiWeb.Resolvers.UserResolver do
          %{user: user, wallet: wallet} <- result do
       {:ok, Map.put(user, :wallet, wallet)}
     else
-      {:error, name, changeset, %{}} -> {:error, changeset}
+      {:error, _name, changeset, %{}} -> {:error, changeset}
     end
+  end
+
+  def resign(_, %{input: input}, _) do
+    Accounts.get_user!(input.id)
+    |> Accounts.update_user(input)
   end
 
   def wallet(%{id: id}, _, _) do

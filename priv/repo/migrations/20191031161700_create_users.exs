@@ -7,6 +7,8 @@ defmodule EzCoinsApi.Repo.Migrations.CreateUsers do
       add :email, :string
       add :password_hash, :string
       add :avatar, :string
+      add :hired_at, :date
+      add :resigned_at, :date
 
       timestamps()
     end
