@@ -9,7 +9,9 @@ defmodule EzCoinsApi.Accounts.Auth do
 
     case check_password(user, args) do
       true -> {:ok, user}
-      _ -> {:error, "Incorrect login credentials"}
+      _ ->
+        message = Gettext.dgettext(EzCoinsApiWeb.Gettext, "errors", "incorrect login credentials")
+        {:error, %{message: message, details: %{ email: message }}}
     end
   end
 
