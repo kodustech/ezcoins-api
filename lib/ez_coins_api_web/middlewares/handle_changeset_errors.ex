@@ -11,6 +11,7 @@ defmodule EzCoinsApiWeb.Middlewares.HandleChangesetErrors do
       |> Enum.reduce(%{}, fn {k, [v | _]}, acc ->
         Map.put(acc, k, Gettext.dgettext(EzCoinsApiWeb.Gettext, "errors", v))
       end)
+
     IO.inspect(errors)
     message = errors |> Enum.map(fn {k, v} -> "#{k} #{v}" end) |> Enum.join(", ")
 

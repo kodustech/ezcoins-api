@@ -8,10 +8,15 @@ defmodule EzCoinsApi.Accounts.Auth do
     user = Repo.get_by(User, email: String.downcase(args.email))
 
     case check_password(user, args) do
-      true -> {:ok, user}
+      true ->
+        {:ok, user}
+
       _ ->
-        message = Gettext.dgettext(EzCoinsApiWeb.Gettext, "errors", "incorrect login credentials")
-        {:error, %{message: message, details: %{ email: message }}}
+        message =
+          Gettext.dgettext(EzCoinsApiWeb.Gettext, "errors", "incorrect login credentials")
+          |> String.capitalize()
+
+        {:error, %{message: message, details: %{email: message}}}
     end
   end
 
