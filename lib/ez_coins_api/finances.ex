@@ -8,8 +8,7 @@ defmodule EzCoinsApi.Finances do
   import Ecto.Query, warn: false
   alias EzCoinsApi.Repo
 
-  alias EzCoinsApi.Finances.Donation
-  alias EzCoinsApi.Finances.Wallet
+  alias EzCoinsApi.Finances.{Donation, Wallet}
 
   @doc """
   Returns the list of donations.
@@ -21,7 +20,10 @@ defmodule EzCoinsApi.Finances do
 
   """
   def list_donations do
-    Repo.all(Donation)
+    Donation
+    |> order_by([d], [d.donate_at, d.id])
+    |> reverse_order
+    |> Repo.all()
   end
 
   @doc """
