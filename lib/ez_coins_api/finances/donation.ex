@@ -3,7 +3,7 @@ defmodule EzCoinsApi.Finances.Donation do
   import Ecto.Changeset
 
   schema "donations" do
-    field :donate_at, :utc_datetime
+    field :donate_at, :date
     field :quantity, :integer
     field :reason, :string
     field :receiver_user_id, :id
