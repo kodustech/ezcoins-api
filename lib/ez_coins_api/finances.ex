@@ -19,11 +19,28 @@ defmodule EzCoinsApi.Finances do
       [%Donation{}, ...]
 
   """
-  def list_donations do
+  def list_donations(filters \\ %{}) do
     Donation
+    |> filter(filters)
     |> order_by([d], [d.donate_at, d.id])
     |> reverse_order
     |> Repo.all()
+  end
+
+  defp filter(query, filters) do
+    conditions = true
+
+    conditions =
+      with %{min_date: min_date} <- filters,
+           do: dynamic([d], d.donate_at >= ^min_date and ^conditions),
+           else: (_ -> conditions)
+
+    conditions =
+      with %{max_date: max_date} <- filters,
+           do: dynamic([d], d.donate_at <= ^max_date and ^conditions),
+           else: (_ -> conditions)
+
+    query |> where(^conditions)
   end
 
   @doc """

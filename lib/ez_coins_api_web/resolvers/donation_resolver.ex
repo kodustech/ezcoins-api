@@ -14,8 +14,14 @@ defmodule EzCoinsApiWeb.Resolvers.DonationResolver do
     end
   end
 
-  def donations(_, _, _) do
-    {:ok, Finances.list_donations()}
+  def donations(_, args, _) do
+    donations =
+      case args do
+        %{filters: filters} -> Finances.list_donations(filters)
+        _ -> Finances.list_donations()
+      end
+
+    {:ok, donations}
   end
 
   def receiver(%{receiver_user_id: receiver_user_id}, _, _) do

@@ -9,6 +9,7 @@ defmodule EzCoinsApiWeb.Schema do
 
   query do
     field :donations, list_of(:donation_type) do
+      arg(:filters, :donation_filter_type)
       resolve(&Resolvers.DonationResolver.donations/3)
     end
 
