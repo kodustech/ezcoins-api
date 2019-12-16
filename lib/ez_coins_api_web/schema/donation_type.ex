@@ -7,7 +7,7 @@ defmodule EzCoinsApiWeb.Schema.Types.DonationType do
 
   object :donation_type do
     field(:id, :id)
-    field(:donate_at, :string)
+    field(:inserted_at, :string)
     field(:quantity, :integer)
     field(:reason, :string)
 
@@ -25,7 +25,6 @@ defmodule EzCoinsApiWeb.Schema.Types.DonationType do
   end
 
   input_object :donation_input_type do
-    field(:donate_at, :string)
     field(:quantity, :integer)
     field(:reason, :string)
     field(:receiver_user_id, :id)

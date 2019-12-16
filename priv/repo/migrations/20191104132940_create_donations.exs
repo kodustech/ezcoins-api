@@ -7,7 +7,6 @@ defmodule EzCoinsApi.Repo.Migrations.CreateDonations do
       add :reason, :string
       add :sender_user_id, references(:users, on_delete: :nothing)
       add :receiver_user_id, references(:users, on_delete: :nothing)
-      add :donate_at, :date
 
       timestamps()
     end

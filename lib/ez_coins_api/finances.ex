@@ -22,7 +22,7 @@ defmodule EzCoinsApi.Finances do
   def list_donations(filters \\ %{}) do
     Donation
     |> filter(filters)
-    |> order_by([d], [d.donate_at, d.id])
+    |> order_by([d], [d.inserted_at, d.id])
     |> reverse_order
     |> Repo.all()
   end
@@ -32,12 +32,12 @@ defmodule EzCoinsApi.Finances do
 
     conditions =
       with %{min_date: min_date} <- filters,
-           do: dynamic([d], d.donate_at >= ^min_date and ^conditions),
+           do: dynamic([d], d.inserted_at >= ^min_date and ^conditions),
            else: (_ -> conditions)
 
     conditions =
       with %{max_date: max_date} <- filters,
-           do: dynamic([d], d.donate_at <= ^max_date and ^conditions),
+           do: dynamic([d], d.inserted_at <= ^max_date and ^conditions),
            else: (_ -> conditions)
 
     query |> where(^conditions)
