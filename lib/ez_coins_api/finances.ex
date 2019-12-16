@@ -40,6 +40,24 @@ defmodule EzCoinsApi.Finances do
            do: dynamic([d], d.inserted_at <= ^max_date and ^conditions),
            else: (_ -> conditions)
 
+    conditions =
+      with %{receiver_user_id: receiver_user_id} <- filters,
+           do:
+             if(receiver_user_id == "",
+               do: conditions,
+               else: dynamic([d], d.receiver_user_id == ^receiver_user_id and ^conditions)
+             ),
+           else: (_ -> conditions)
+
+    conditions =
+      with %{sender_user_id: sender_user_id} <- filters,
+           do:
+             if(sender_user_id == "",
+               do: conditions,
+               else: dynamic([d], d.sender_user_id == ^sender_user_id and ^conditions)
+             ),
+           else: (_ -> conditions)
+
     query |> where(^conditions)
   end
 

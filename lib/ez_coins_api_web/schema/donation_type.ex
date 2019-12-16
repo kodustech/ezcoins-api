@@ -31,7 +31,9 @@ defmodule EzCoinsApiWeb.Schema.Types.DonationType do
   end
 
   input_object :donation_filter_type do
-    field(:min_date, :string)
     field(:max_date, :string)
+    field(:min_date, :string)
+    field(:receiver_user_id, :id)
+    field(:sender_user_id, :id)
   end
 end
