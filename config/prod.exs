@@ -10,7 +10,14 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :ez_coins_api, EzCoinsApiWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  url: [host: "api.ezcoins.ezdevs.com.br", port: 443],
+  https: [
+    :inet6,
+    port: 443,
+    cipher_suite: :strong,
+    keyfile: System.get_env("EZ_COINS_API_SSL_KEY_PATH"),
+    certfile: System.get_env("EZ_COINS_API_SSL_CERT_PATH")
+  ],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -52,4 +59,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-import_config "prod.secret.exs"
+#import_config "prod.secret.exs"
