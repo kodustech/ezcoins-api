@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: docker:17.05.0-ce-git
-    working_directory: ../
+    working_directory: /ez-coins-api
     steps:
       - checkout
       - setup_remote_docker
