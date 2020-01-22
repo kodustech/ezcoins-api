@@ -2,7 +2,7 @@ defmodule EzCoinsApiWeb.Router do
   use EzCoinsApiWeb, :router
 
   pipeline :api do
-    plug CORSPlug, origin: "http://localhost:3000"
+    plug CORSPlug, origin: "*"
     plug :accepts, ["json"]
     plug(EzCoinsApiWeb.Plugs.Context)
   end
