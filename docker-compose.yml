@@ -1,12 +1,14 @@
 version: '3.7'
 
 services:
-  database:
+  postgres:
     image: postgres
     restart: always
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - /private/var/lib/postgresql:/var/lib/postgresql
 
   api:
     image: ez-coins-api
@@ -14,4 +16,4 @@ services:
     ports:
       - ${PORT}:${PORT}
     depends_on:
-      - database
+      - postgres
