@@ -11,7 +11,7 @@ services:
       - /private/var/lib/postgresql:/var/lib/postgresql
 
   api:
-    image: ez-coins-api
+    image: maykonmichel/ez-coins-api
     restart: always
     ports:
       - ${PORT}:${PORT}
