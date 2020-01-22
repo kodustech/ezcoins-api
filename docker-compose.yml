@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  postgres:
+  ez_coins_db:
     image: postgres
     restart: always
     environment:
@@ -16,4 +16,4 @@ services:
     ports:
       - ${PORT}:${PORT}
     depends_on:
-      - postgres
+      - ez_coins_db
