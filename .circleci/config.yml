@@ -1,19 +1,20 @@
 version: 2
 jobs:
   setup:
-    type: approval
     docker:
-      - image: docker:18.06.3-ce-git
+      - image: docker:17.05.0-ce-git
     steps:
       - run:
           name: Setup app
           command: |
-            scp -o StrictHostKeyChecking=no -r docker-compose.yml ezdevs@138.68.226.93:~/ezcoins/api/
+            scp -o StrictHostKeyChecking=no -r ./docker-compose.yml ezdevs@138.68.226.93:~/ezcoins/api/
             ssh -o StrictHostKeyChecking=no ezdevs@138.68.226.93 docker-compose -f ~/ezcoins/api/docker-compose.yml up
   build:
     type: approval
+    requires:
+      - setup
     docker:
-      - image: docker:18.06.3-ce-git
+      - image: docker:17.05.0-ce-git
     working_directory: /ez-coins-api
     steps:
       - checkout
@@ -35,12 +36,3 @@ jobs:
             docker tag ez-coins-api $DOCKERHUB_USERNAME/ez-coins-api:latest
             docker push $DOCKERHUB_USERNAME/ez-coins-api:$CIRCLE_SHA1
             docker push $DOCKERHUB_USERNAME/ez-coins-api:latest
-
-workflows:
-  version: 2
-  setup:
-    jobs:
-      - setup
-  build:
-    jobs:
-      - build
