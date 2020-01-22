@@ -1,6 +1,8 @@
 #!/bin/sh
 # shellcheck disable=SC2046
-export $(cat .env)
+if [ -f ".env" ]; then
+  export "$(cat .env)"
+fi
 
 while ! pg_isready -q -h $DB_HOST -p 5432 -U $DB_USER
 do
