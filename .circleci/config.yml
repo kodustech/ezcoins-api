@@ -47,7 +47,10 @@ workflows:
   version: 2
   setup-and-deploy:
     jobs:
-      - setup
+      - build
+      - setup:
+          requires:
+            - build
       - deploy:
           requires:
             - setup
