@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
-            docker-compose up -d
+            docker build -t ez-coins-api .
       - deploy:
           name: Push application Docker image
           command: |
