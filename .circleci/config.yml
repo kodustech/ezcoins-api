@@ -10,28 +10,35 @@ jobs:
           command: |
             scp -o StrictHostKeyChecking=no -r docker-compose.yml ezdevs@138.68.226.93:~/ezcoins/api/
             ssh -o StrictHostKeyChecking=no ezdevs@138.68.226.93 ~/ezcoins/api/docker-compose -f docker-compose.yml up
-#  build:
-#    type: approval
-#    docker:
-#      - image: docker:18.06.3-ce-git
-#    working_directory: /ez-coins-api
-#    steps:
-#      - checkout
-#      - setup_remote_docker
-#      - run:
-#          name: Install dependencies
-#          command: |
-#            apk add --no-cache py-pip=9.0.0-r1
-#            pip install docker-compose==1.15.0
-#      - run:
-#          name: Build application Docker image
-#          command: |
-#            docker build -t ez-coins-api .
-#      - deploy:
-#          name: Push application Docker image
-#          command: |
-#            docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
-#            docker tag ez-coins-api $DOCKERHUB_USERNAME/ez-coins-api:$CIRCLE_SHA1
-#            docker tag ez-coins-api $DOCKERHUB_USERNAME/ez-coins-api:latest
-#            docker push $DOCKERHUB_USERNAME/ez-coins-api:$CIRCLE_SHA1
-#            docker push $DOCKERHUB_USERNAME/ez-coins-api:latest
+  build:
+    type: approval
+    docker:
+      - image: docker:18.06.3-ce-git
+    working_directory: /ez-coins-api
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache py-pip=9.0.0-r1
+            pip install docker-compose==1.15.0
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build -t ez-coins-api .
+      - deploy:
+          name: Push application Docker image
+          command: |
+            docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
+            docker tag ez-coins-api $DOCKERHUB_USERNAME/ez-coins-api:$CIRCLE_SHA1
+            docker tag ez-coins-api $DOCKERHUB_USERNAME/ez-coins-api:latest
+            docker push $DOCKERHUB_USERNAME/ez-coins-api:$CIRCLE_SHA1
+            docker push $DOCKERHUB_USERNAME/ez-coins-api:latest
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - setup
+      - build
