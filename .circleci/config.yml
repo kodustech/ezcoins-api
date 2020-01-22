@@ -1,15 +1,5 @@
 version: 2
 jobs:
-  setup:
-    docker:
-      - image: docker:17.05.0-ce-git
-    steps:
-      - checkout
-      - run:
-          name: Setup app
-          command: |
-            scp -o StrictHostKeyChecking=no -r ./docker-compose.yml ./.env ezdevs@138.68.226.93:~/ezcoins/api/
-            ssh -o StrictHostKeyChecking=no ezdevs@138.68.226.93 docker pull maykonmichel/ez-coins-api
   build:
     docker:
       - image: docker:17.05.0-ce-git
@@ -34,6 +24,16 @@ jobs:
             docker tag ez-coins-api $DOCKERHUB_USERNAME/ez-coins-api:latest
             docker push $DOCKERHUB_USERNAME/ez-coins-api:$CIRCLE_SHA1
             docker push $DOCKERHUB_USERNAME/ez-coins-api:latest
+  setup:
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - run:
+          name: Setup app
+          command: |
+            scp -o StrictHostKeyChecking=no -r ./docker-compose.yml ./.env.backup ezdevs@138.68.226.93:~/ezcoins/api/
+            ssh -o StrictHostKeyChecking=no ezdevs@138.68.226.93 cd ezcoins/api && mv .env.backup .env && docker pull maykonmichel/ez-coins-api
   deploy:
     docker:
       - image: docker:17.05.0-ce-git
