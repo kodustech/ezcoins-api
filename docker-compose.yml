@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  database:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+  api:
+    image: ez-coins-api
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - database
