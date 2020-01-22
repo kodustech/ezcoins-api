@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:17.05.0-ce-git
+    working_directory: ../
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache py-pip=9.0.0-r1
+            pip install docker-compose==1.15.0
+      - deploy:
+          name: Push application Docker image
+          command: |
+            docker login -e $DOCKERHUB_EMAIL -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASS
+            docker tag ez-coins-api $DOCKERHUB_USERNAME/ez-coins-api:$CIRCLE_SHA1
+            docker tag ez-coins-api $DOCKERHUB_USERNAME/ez-coins-api:latest
+            docker push $DOCKERHUB_USERNAME/ez-coins-api:$CIRCLE_SHA1
+            docker push $DOCKERHUB_USERNAME/ez-coins-api:latest
