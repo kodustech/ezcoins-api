@@ -11,9 +11,10 @@ defmodule EzCoinsApi.Application do
       # Start the Ecto repository
       EzCoinsApi.Repo,
       # Start the endpoint when the application starts
-      EzCoinsApiWeb.Endpoint
+      EzCoinsApiWeb.Endpoint,
       # Starts a worker by calling: EzCoinsApi.Worker.start_link(arg)
       # {EzCoinsApi.Worker, arg},
+      {Absinthe.Subscription, [EzCoinsApiWeb.Endpoint]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
