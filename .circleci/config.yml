@@ -41,11 +41,11 @@ jobs:
       - run:
           name: Setup app
           command: |
-            ssh -o StrictHostKeyChecking=no ezdevs@138.68.226.93 "cd ezcoins/api && export $(cat .env) && docker-compose -f docker-compose.yml up"
+            ssh -o StrictHostKeyChecking=no ezdevs@138.68.226.93 "cd ezcoins/api && export $(cat .env) && docker-compose -f docker-compose.yml up -d"
 
 workflows:
   version: 2
-  setup-and-deploy:
+  build-and-deploy:
     jobs:
       - build
       - setup:
