@@ -49,8 +49,8 @@ workflows:
     jobs:
       - build:
           filters:
-            tags:
-              only: /.*/
+            branches:
+              ignore: /.*/
       - setup:
           requires:
             - build
