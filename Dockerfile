@@ -36,6 +36,6 @@ RUN chown -R nobody: /api
 USER nobody
 
 COPY entrypoint.sh .
-COPY .env .
+COPY .env* ./
 
 CMD ["./entrypoint.sh"]
