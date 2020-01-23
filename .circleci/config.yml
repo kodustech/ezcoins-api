@@ -47,7 +47,9 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            tags
       - setup:
           requires:
             - build
