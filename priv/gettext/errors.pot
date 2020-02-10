@@ -96,5 +96,5 @@ msgstr ""
 msgid "incorrect login credentials"
 msgstr ""
 
-msgid "user resigned"
+msgid "user don't exists"
 msgstr ""
