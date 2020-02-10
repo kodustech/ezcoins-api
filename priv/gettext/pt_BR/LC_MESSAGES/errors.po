@@ -94,3 +94,6 @@ msgstr "deve ser igual a %{number}"
 
 msgid "incorrect login credentials"
 msgstr "credenciais de login incorretas"
+
+msgid "user resigned"
+msgstr "usuário desativado"

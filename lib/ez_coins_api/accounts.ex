@@ -26,13 +26,13 @@ defmodule EzCoinsApi.Accounts do
 
   def list_active_users do
     User
-    |> where([u], is_nil(u.resigned_at))
+    |> where([u], u.id != 1 and is_nil(u.resigned_at))
     |> Repo.all()
   end
 
   def list_users_except_id(id) do
     User
-    |> where([u], u.id != ^id and is_nil(u.resigned_at))
+    |> where([u], u.id != 1 and u.id != ^id and is_nil(u.resigned_at))
     |> Repo.all()
   end
 

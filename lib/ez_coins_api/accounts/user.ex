@@ -15,25 +15,23 @@ defmodule EzCoinsApi.Accounts.User do
     timestamps()
   end
 
-  def changeset(user, attrs) do
-    case attrs do
-      %{resigned_at: _resigned_at} ->
-        user
-        |> change
-        |> validate_not_resigned
-        |> cast(attrs, [:resigned_at])
-        |> validate_required([:resigned_at])
+  def changeset(user, %{resigned_at: _resigned_at} = attrs) do
+    user
+    |> change
+    |> validate_not_resigned
+    |> cast(attrs, [:resigned_at])
+    |> validate_required([:resigned_at])
+  end
 
-      _ ->
-        user
-        |> cast(attrs, [:name, :email, :password, :password_confirmation, :avatar])
-        |> validate_required([:name, :email, :password, :password_confirmation, :avatar])
-        |> validate_format(:email, ~r/@/)
-        |> validate_length(:password, min: 6, max: 50)
-        |> validate_confirmation(:password)
-        |> unique_constraint(:email)
-        |> hash_password
-    end
+  def changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name, :email, :hired_at, :password, :password_confirmation, :avatar])
+    |> validate_required([:name, :email, :hired_at, :password, :password_confirmation, :avatar])
+    |> validate_format(:email, ~r/@/)
+    |> validate_length(:password, min: 6, max: 50)
+    |> validate_confirmation(:password)
+    |> unique_constraint(:email)
+    |> hash_password
   end
 
   defp validate_not_resigned(changeset) do
