@@ -9,6 +9,8 @@ services:
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - /private/var/lib/postgresql:/var/lib/postgresql
+    ports:
+      - 4002:5432
 
   api:
     image: maykonmichel/ez-coins-api
