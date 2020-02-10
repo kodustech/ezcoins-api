@@ -97,3 +97,6 @@ msgstr "credenciais de login incorretas"
 
 msgid "user resigned"
 msgstr "usuário desativado"
+
+msgid "user don't exists"
+msgstr "usuário não existe"
