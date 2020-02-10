@@ -95,3 +95,6 @@ msgstr ""
 
 msgid "incorrect login credentials"
 msgstr ""
+
+msgid "user resigned"
+msgstr ""
