@@ -73,6 +73,27 @@ defmodule EzCoinsApi.Seeds.RedeemsSeed do
         quantity: -75,
         reason: "Resgate do prêmio Vale fardinho de Brahma 12 Latas"
       },
+      %{
+        inserted_at: ~N[2020-02-06 00:00:00],
+        sender_user_id: "1",
+        receiver_user_id: "16",
+        quantity: -75,
+        reason: "Resgate do prêmio Vale fardinho de Brahma 12 Latas"
+      },
+      %{
+        inserted_at: ~N[2020-02-06 00:00:00],
+        sender_user_id: "1",
+        receiver_user_id: "15",
+        quantity: -75,
+        reason: "Resgate do prêmio Vale fardinho de Brahma 12 Latas"
+      },
+      %{
+        inserted_at: ~N[2020-02-11 00:00:00],
+        sender_user_id: "1",
+        receiver_user_id: "8",
+        quantity: -99,
+        reason: "Resgate do prêmio Mouse Pad Gamer Dragão (70 X 35 cm)"
+      },
     ]
 
     map(
