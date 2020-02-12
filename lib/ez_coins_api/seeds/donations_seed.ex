@@ -4049,6 +4049,13 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         quantity: 10,
         reason: "Ajuda com o estágio"
       },
+      %{
+        inserted_at: ~N[2020-02-10 00:00:00],
+        sender_user_id: "30",
+        receiver_user_id: "20",
+        quantity: 10,
+        reason: "Arrumou o seed dos ez.coins só com a presença"
+      },
     ]
 
     map(
