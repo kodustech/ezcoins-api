@@ -38,8 +38,10 @@ defmodule EzCoinsApi.AccountsTest do
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert user.email == "some email"
-      assert user.password_hash == "some password_hash"
+      assert user.avatar == "some avatar uri"
+      assert user.name == "some name"
+      assert user.email == "some@email.com"
+      assert user.hired_at == ~D[2017-10-29]
     end
 
     test "create_user/1 with invalid data returns error changeset" do
