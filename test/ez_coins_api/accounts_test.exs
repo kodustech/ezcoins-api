@@ -71,6 +71,12 @@ defmodule EzCoinsApi.AccountsTest do
       assert user == Accounts.get_user!(user.id)
     end
 
+    test "list_active_users/0 don't retrieves resigned users" do
+      user = user_fixture()
+      assert {:ok, %User{}} = Accounts.update_user(user, %{resigned_at: ~D[2018-10-29]})
+      assert Accounts.list_active_users() == []
+    end
+
     test "change_user/1 returns a user changeset" do
       user = user_fixture()
       assert %Ecto.Changeset{} = Accounts.change_user(user)
