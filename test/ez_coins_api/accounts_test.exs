@@ -6,7 +6,14 @@ defmodule EzCoinsApi.AccountsTest do
   describe "users" do
     alias EzCoinsApi.Accounts.User
 
-    @valid_attrs %{email: "some email", password_hash: "some password_hash"}
+    @valid_attrs %{
+      avatar: "some avatar uri",
+      name: "some name",
+      email: "some@email.com",
+      password: "same password",
+      password_confirmation: "same password",
+      hired_at: ~D[2017-10-29]
+    }
     @update_attrs %{email: "some updated email", password_hash: "some updated password_hash"}
     @invalid_attrs %{email: nil, password_hash: nil}
 

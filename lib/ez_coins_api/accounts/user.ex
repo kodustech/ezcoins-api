@@ -53,6 +53,7 @@ defmodule EzCoinsApi.Accounts.User do
         }
       } ->
         change(changeset, Argon2.add_hash(password))
+        |> delete_change(:password_confirmation)
 
       _ ->
         changeset
