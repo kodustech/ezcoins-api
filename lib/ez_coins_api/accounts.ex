@@ -65,13 +65,19 @@ defmodule EzCoinsApi.Accounts do
 
   """
   def create_user(attrs \\ %{}) do
-    {:ok, %{user: user}} = Multi.new()
-    |> Multi.insert(:user, User.changeset(%User{}, attrs))
-    |> Multi.run(:wallet, fn repo, %{user: user} ->
-      repo.insert(Wallet.changeset(%Wallet{}, %{owner_user_id: user.id}))
-    end)
-    |> Repo.transaction()
-    {:ok, user}
+    case Multi.new()
+         |> Multi.insert(:user, User.changeset(%User{}, attrs))
+         |> Multi.run(
+              :wallet,
+              fn repo, %{user: user} ->
+                repo.insert(Wallet.changeset(%Wallet{}, %{owner_user_id: user.id}))
+              end
+            )
+         |> Repo.transaction() do
+      {:ok, %{user: user}} -> {:ok, user}
+      {:error, :user, user, _} -> {:error, user}
+    end
+
   end
 
   @doc """

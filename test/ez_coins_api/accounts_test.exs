@@ -15,7 +15,14 @@ defmodule EzCoinsApi.AccountsTest do
       hired_at: ~D[2017-10-29]
     }
     @update_attrs %{email: "some updated email", password_hash: "some updated password_hash"}
-    @invalid_attrs %{email: nil, password_hash: nil}
+    @invalid_attrs %{
+      avatar: nil,
+      name: nil,
+      email: "some not valid email",
+      password: "some password",
+      password_confirmation: "another password",
+      hired_at: "some not date"
+    }
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
