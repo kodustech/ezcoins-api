@@ -14,7 +14,10 @@ defmodule EzCoinsApi.AccountsTest do
       password_confirmation: "same password",
       hired_at: ~D[2017-10-29]
     }
-    @update_attrs %{email: "some updated email", password_hash: "some updated password_hash"}
+    @update_attrs %{
+      avatar: "another avatar uri",
+      name: "another name"
+    }
     @invalid_attrs %{
       avatar: nil,
       name: nil,
@@ -58,8 +61,8 @@ defmodule EzCoinsApi.AccountsTest do
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
-      assert user.email == "some updated email"
-      assert user.password_hash == "some updated password_hash"
+      assert user.name == "another name"
+      assert user.avatar == "another avatar uri"
     end
 
     test "update_user/2 with invalid data returns error changeset" do
