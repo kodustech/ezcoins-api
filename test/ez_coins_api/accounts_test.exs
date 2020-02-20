@@ -110,5 +110,20 @@ defmodule EzCoinsApi.AccountsTest do
                }
              }
     end
+
+    test "authenticate/1 with invalid password returns a user incorrect login credentials error" do
+      message = "Credenciais de login incorretas"
+      user = user_fixture()
+
+      assert Auth.authenticate(@invalid_password) == {
+               :error,
+               %{
+                 message: message,
+                 details: %{
+                   email: message
+                 }
+               }
+             }
+    end
   end
 end
