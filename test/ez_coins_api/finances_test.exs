@@ -1,5 +1,6 @@
 defmodule EzCoinsApi.FinancesTest do
   use EzCoinsApi.DataCase
+  use EzCoinsApi.Fixtures, [:wallet]
 
   alias EzCoinsApi.Finances
 
@@ -67,18 +68,9 @@ defmodule EzCoinsApi.FinancesTest do
   describe "wallets" do
     alias EzCoinsApi.Finances.Wallet
 
-    @valid_attrs %{balance: 42, received: 42, to_offer: 42}
+    @valid_attrs %{owner_user_id: 1, balance: 42, received: 42, to_offer: 42}
     @update_attrs %{balance: 43, received: 43, to_offer: 43}
     @invalid_attrs %{balance: nil, received: nil, to_offer: nil}
-
-    def wallet_fixture(attrs \\ %{}) do
-      {:ok, wallet} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Finances.create_wallet()
-
-      wallet
-    end
 
     test "list_wallets/0 returns all wallets" do
       wallet = wallet_fixture()
