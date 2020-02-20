@@ -98,7 +98,7 @@ defmodule EzCoinsApi.AccountsTest do
 
     test "authenticate/1 with invalid data returns a user don't exists error" do
       message = "Usuário não existe"
-      user = user_fixture()
+      user_fixture()
 
       assert Auth.authenticate(@invalid_attrs) == {
                :error,
@@ -111,11 +111,27 @@ defmodule EzCoinsApi.AccountsTest do
              }
     end
 
-    test "authenticate/1 with invalid password returns a user incorrect login credentials error" do
+    test "authenticate/1 with invalid password returns a incorrect login credentials error" do
       message = "Credenciais de login incorretas"
-      user = user_fixture()
+      user_fixture()
 
       assert Auth.authenticate(@invalid_password) == {
+               :error,
+               %{
+                 message: message,
+                 details: %{
+                   email: message
+                 }
+               }
+             }
+    end
+
+    test "authenticate/1 with resigned user credentials returns a user resigned error" do
+      message = "Usuário desativado"
+      user = user_fixture()
+      Accounts.update_user(user, %{resigned_at: ~D[2018-10-29]})
+
+      assert Auth.authenticate(@valid_attrs) == {
                :error,
                %{
                  message: message,
