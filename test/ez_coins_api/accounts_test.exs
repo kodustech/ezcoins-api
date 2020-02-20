@@ -74,4 +74,22 @@ defmodule EzCoinsApi.AccountsTest do
       assert %Ecto.Changeset{} = Accounts.change_user(user)
     end
   end
+
+  describe "auth" do
+    alias EzCoinsApi.Accounts.Auth
+
+    @valid_attrs %{
+      email: "some@email.com",
+      password: "same password"
+    }
+    @invalid_attrs %{
+      email: "some@email.com",
+      password: "another password"
+    }
+
+    test "authenticate/1 with valid data authenticates a user" do
+      user = user_fixture()
+      assert Auth.authenticate(@valid_attrs) == {:ok, user}
+    end
+  end
 end
