@@ -23,7 +23,7 @@ defmodule EzCoinsApi.UserResolverTest do
   end
 
   describe "user query" do
-    test "users returns all users", %{conn: conn} do
+    test "users returns all users", %{admin: admin, conn: conn} do
       user =
         user_fixture()
         |> user_to_map()
@@ -50,7 +50,7 @@ defmodule EzCoinsApi.UserResolverTest do
         |> post("/graphql", %{query: query})
         |> json_response(200)
 
-      assert users == [user]
+      assert users == [user_to_map(admin), user]
     end
 
     test "user returns the user with given id", %{conn: conn} do
@@ -87,7 +87,9 @@ defmodule EzCoinsApi.UserResolverTest do
   end
 
   describe "user mutation" do
-    test "create_user with valid data creates a user", %{conn: conn} do
+    test "create_user with valid data and admin authenticated creates a user", %{
+      admin_conn: admin_conn
+    } do
       query = """
         mutation($input: UserInputType!) {
           create_user(input: $input) {
@@ -110,7 +112,7 @@ defmodule EzCoinsApi.UserResolverTest do
           "create_user" => user
         }
       } =
-        conn
+        admin_conn
         |> post("/graphql", %{query: query, variables: variables})
         |> json_response(200)
 
