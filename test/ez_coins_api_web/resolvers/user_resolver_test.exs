@@ -23,7 +23,7 @@ defmodule EzCoinsApi.UserResolverTest do
   end
 
   describe "user query" do
-    test "users returns all users", %{admin: admin, conn: conn} do
+    test "users returns all users", %{admin: admin, user: common_user, conn: conn} do
       user =
         user_fixture()
         |> user_to_map()
@@ -50,7 +50,7 @@ defmodule EzCoinsApi.UserResolverTest do
         |> post("/graphql", %{query: query})
         |> json_response(200)
 
-      assert users == [user_to_map(admin), user]
+      assert users == [user_to_map(admin), user_to_map(common_user), user]
     end
 
     test "user returns the user with given id", %{conn: conn} do
