@@ -67,7 +67,7 @@ defmodule EzCoinsApi.FinancesTest do
     end
 
     test "create_donation/1 with valid data creates a donation" do
-      assert {:ok, %Donation{} = donation} = Finances.create_donation(@valid_attrs)
+      donation = donation_fixture()
       assert donation.quantity == 42
       assert donation.reason == "some reason"
     end
