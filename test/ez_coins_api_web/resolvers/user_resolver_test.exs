@@ -201,5 +201,36 @@ defmodule EzCoinsApi.UserResolverTest do
       assert details["name"] == "não pode ficar em branco"
       assert details["password_confirmation"] == "não corresponde à confirmação"
     end
+
+    test "resign_user with valid data and admin authenticated creates a user", %{
+      user: user,
+      admin_conn: admin_conn
+    } do
+      query = """
+        mutation($input: ResignUserInputType!) {
+          resign_user(input: $input) {
+            id
+          }
+        }
+      """
+
+      variables = %{
+        input: %{
+          id: user.id,
+          resigned_at: "2018-10-29"
+        }
+      }
+
+      %{
+        "data" => %{
+          "resign_user" => resigned_user
+        }
+      } =
+        admin_conn
+        |> post("/graphql", %{query: query, variables: variables})
+        |> json_response(200)
+
+      assert resigned_user["id"] == "#{user.id}"
+    end
   end
 end
