@@ -37,15 +37,17 @@ defmodule EzCoinsApi.FinancesTest do
           wallet: sender_wallet
         }
       } = Accounts.create_user(@sender_user_attrs)
+
       Finances.update_wallet(sender_wallet, @wallet_attrs)
 
       {
         :ok,
         %{
           user: receiver_user,
-          wallet: receiver_wallet,
+          wallet: receiver_wallet
         }
       } = Accounts.create_user(@receiver_user_attrs)
+
       Finances.update_wallet(receiver_wallet, @wallet_attrs)
 
       {:ok, %{donation: donation}} =
