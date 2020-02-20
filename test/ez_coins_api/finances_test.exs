@@ -66,9 +66,18 @@ defmodule EzCoinsApi.FinancesTest do
   end
 
   describe "wallets" do
+    alias EzCoinsApi.Accounts
     alias EzCoinsApi.Finances.Wallet
 
-    @valid_attrs %{owner_user_id: 1, balance: 42, received: 42, to_offer: 42}
+    @valid_user_attrs %{
+      avatar: "some avatar uri",
+      name: "some name",
+      email: "some@email.com",
+      password: "same password",
+      password_confirmation: "same password",
+      hired_at: ~D[2017-10-29]
+    }
+    @valid_attrs %{balance: 42, received: 42, to_offer: 42}
     @update_attrs %{balance: 43, received: 43, to_offer: 43}
     @invalid_attrs %{balance: nil, received: nil, to_offer: nil}
 
@@ -83,7 +92,18 @@ defmodule EzCoinsApi.FinancesTest do
     end
 
     test "create_wallet/1 with valid data creates a wallet" do
-      assert {:ok, %Wallet{} = wallet} = Finances.create_wallet(@valid_attrs)
+      {
+        :ok,
+        %{
+          user: %{
+            id: id
+          }
+        }
+      } = Accounts.create_user(@valid_user_attrs)
+
+      assert {:ok, %Wallet{} = wallet} =
+               Finances.create_wallet(Map.put(@valid_attrs, :owner_user_id, id))
+
       assert wallet.balance == 42
       assert wallet.received == 42
       assert wallet.to_offer == 42
