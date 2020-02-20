@@ -45,6 +45,15 @@ defmodule EzCoinsApiWeb.ConnCase do
     hired_at: ~D[2000-10-29]
   }
 
+  @user %{
+    avatar: "some user avatar uri",
+    name: "some user name",
+    email: "some.user@email.com",
+    password: "same user password",
+    password_confirmation: "same user password",
+    hired_at: ~D[2001-10-29]
+  }
+
   setup tags do
     {:ok, %{user: user}} = EzCoinsApi.Accounts.create_user(@admin)
     EzCoinsApi.Accounts.update_user(user, %{is_admin: true})
@@ -57,5 +66,18 @@ defmodule EzCoinsApiWeb.ConnCase do
       |> Plug.Conn.put_req_header("content-type", "application/json")
 
     {:ok, admin: admin, admin_conn: admin_conn}
+  end
+
+  setup tags do
+    {:ok, _} = EzCoinsApi.Accounts.create_user(@user)
+    {:ok, user} = EzCoinsApi.Accounts.Auth.authenticate(@user)
+    {:ok, jwt_token, _} = EzCoinsApi.Guardian.encode_and_sign(user)
+
+    user_conn =
+      Phoenix.ConnTest.build_conn()
+      |> Plug.Conn.put_req_header("authorization", "Bearer #{jwt_token}")
+      |> Plug.Conn.put_req_header("content-type", "application/json")
+
+    {:ok, user: user, user_conn: user_conn}
   end
 end
