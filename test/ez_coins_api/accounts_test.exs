@@ -83,6 +83,10 @@ defmodule EzCoinsApi.AccountsTest do
       password: "same password"
     }
     @invalid_attrs %{
+      email: "another@email.com",
+      password: "another password"
+    }
+    @invalid_password %{
       email: "some@email.com",
       password: "another password"
     }
@@ -90,6 +94,21 @@ defmodule EzCoinsApi.AccountsTest do
     test "authenticate/1 with valid data authenticates a user" do
       user = user_fixture()
       assert Auth.authenticate(@valid_attrs) == {:ok, user}
+    end
+
+    test "authenticate/1 with invalid data returns a user don't exists error" do
+      message = "Usuário não existe"
+      user = user_fixture()
+
+      assert Auth.authenticate(@invalid_attrs) == {
+               :error,
+               %{
+                 message: message,
+                 details: %{
+                   email: message
+                 }
+               }
+             }
     end
   end
 end
