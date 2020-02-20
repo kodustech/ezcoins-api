@@ -123,5 +123,39 @@ defmodule EzCoinsApi.UserResolverTest do
       assert user["hired_at"] == @valid_attrs.hired_at
       assert user["resigned_at"] == nil
     end
+
+    test "create_user with valid data and user authenticated returns unauthorized error", %{
+      user_conn: user_conn
+    } do
+      query = """
+        mutation($input: UserInputType!) {
+          create_user(input: $input) {
+            id
+            avatar
+            name
+            email
+            hired_at
+            resigned_at
+          }
+        }
+      """
+
+      variables = %{
+        input: @valid_attrs
+      }
+
+      %{
+        "errors" => [
+          %{
+            "message" => message
+          }
+        ]
+      } =
+        user_conn
+        |> post("/graphql", %{query: query, variables: variables})
+        |> json_response(200)
+
+      assert message == "não autorizado"
+    end
   end
 end
