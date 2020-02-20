@@ -10,6 +10,12 @@ defmodule EzCoinsApi.UserResolverTest do
     password_confirmation: "same password",
     hired_at: "2017-10-29"
   }
+  @invalid_attrs %{
+    email: "not a email",
+    password: "some password",
+    password_confirmation: "another password",
+    hired_at: "not a date"
+  }
 
   def user_to_map(user) do
     %{
@@ -156,6 +162,44 @@ defmodule EzCoinsApi.UserResolverTest do
         |> json_response(200)
 
       assert message == "não autorizado"
+    end
+
+    test "create_user with invalid data and admin authenticated returns fields errors", %{
+      admin_conn: admin_conn
+    } do
+      query = """
+        mutation($input: UserInputType!) {
+          create_user(input: $input) {
+            id
+            avatar
+            name
+            email
+            hired_at
+            resigned_at
+          }
+        }
+      """
+
+      variables = %{
+        input: @invalid_attrs
+      }
+
+      %{
+        "errors" => [
+          %{
+            "details" => details
+          }
+        ]
+      } =
+        admin_conn
+        |> post("/graphql", %{query: query, variables: variables})
+        |> json_response(200)
+
+      assert details["avatar"] == "não pode ficar em branco"
+      assert details["email"] == "possui um formato inválido"
+      assert details["hired_at"] == "não é válido"
+      assert details["name"] == "não pode ficar em branco"
+      assert details["password_confirmation"] == "não corresponde à confirmação"
     end
   end
 end
