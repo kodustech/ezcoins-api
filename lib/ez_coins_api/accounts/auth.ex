@@ -8,14 +8,20 @@ defmodule EzCoinsApi.Accounts.Auth do
     user = Repo.get_by(User, email: String.downcase(args.email))
 
     case user do
-      nil -> error("user don't exists")
-      %{resigned_at: resigned_at} when resigned_at != nil -> error("user resigned")
-      _ -> case check_password(user, args) do
-             true ->
-               {:ok, user}
+      nil ->
+        error("user don't exists")
 
-             _ -> error("incorrect login credentials")
-           end
+      %{resigned_at: resigned_at} when resigned_at != nil ->
+        error("user resigned")
+
+      _ ->
+        case check_password(user, args) do
+          true ->
+            {:ok, user}
+
+          _ ->
+            error("incorrect login credentials")
+        end
     end
   end
 

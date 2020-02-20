@@ -23,7 +23,10 @@ defmodule EzCoinsApi.Accounts.User do
     |> validate_required([:resigned_at])
   end
 
-  def changeset(user, %{password: _password, password_confirmation: password_confirmation} = attrs) do
+  def changeset(
+        user,
+        %{password: _password, password_confirmation: password_confirmation} = attrs
+      ) do
     user
     |> cast(attrs, [:name, :email, :hired_at, :password, :password_confirmation, :avatar])
     |> validate_required([:name, :email, :hired_at, :password, :password_confirmation, :avatar])
