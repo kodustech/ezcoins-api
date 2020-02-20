@@ -15,11 +15,12 @@ defmodule EzCoinsApi.UserResolverTest do
 
   describe "user query" do
     test "users returns all users", %{conn: conn} do
-      user = user_fixture()
-             |> user_to_map()
+      user =
+        user_fixture()
+        |> user_to_map()
 
       query = """
-        {
+        query {
           users {
             id
             avatar
@@ -41,6 +42,38 @@ defmodule EzCoinsApi.UserResolverTest do
         |> json_response(200)
 
       assert users == [user]
+    end
+
+    test "user returns the user with given id", %{conn: conn} do
+      user =
+        user_fixture()
+        |> user_to_map()
+
+      query = """
+        query($id: ID!) {
+          user(id: $id) {
+            id
+            avatar
+            name
+            email
+            hired_at
+            resigned_at
+          }
+        }
+      """
+
+      variables = %{
+        id: user["id"]
+      }
+
+      %{
+        "data" => data
+      } =
+        conn
+        |> post("/graphql", %{query: query, variables: variables})
+        |> json_response(200)
+
+      assert data["user"] == user
     end
   end
 end
