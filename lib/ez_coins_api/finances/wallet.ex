@@ -16,5 +16,8 @@ defmodule EzCoinsApi.Finances.Wallet do
     wallet
     |> cast(attrs, [:balance, :received, :to_offer, :owner_user_id])
     |> validate_required([:owner_user_id])
+    |> validate_number(:balance, greater_than_or_equal_to: 0)
+    |> validate_number(:received, greater_than_or_equal_to: 0)
+    |> validate_number(:to_offer, greater_than_or_equal_to: 0)
   end
 end

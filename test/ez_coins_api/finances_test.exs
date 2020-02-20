@@ -79,7 +79,7 @@ defmodule EzCoinsApi.FinancesTest do
     }
     @valid_attrs %{balance: 42, received: 42, to_offer: 42}
     @update_attrs %{balance: 43, received: 43, to_offer: 43}
-    @invalid_attrs %{balance: nil, received: nil, to_offer: nil}
+    @invalid_attrs %{balance: nil, received: -42, to_offer: nil}
 
     test "list_wallets/0 returns all wallets" do
       wallet = wallet_fixture()
