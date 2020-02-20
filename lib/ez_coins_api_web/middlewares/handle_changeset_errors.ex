@@ -8,12 +8,17 @@ defmodule EzCoinsApiWeb.Middlewares.HandleChangesetErrors do
     errors =
       changeset
       |> Ecto.Changeset.traverse_errors(fn {err, _opts} -> err end)
-      |> Enum.reduce(%{}, fn {k, [v | _]}, acc ->
-        Map.put(acc, k, Gettext.dgettext(EzCoinsApiWeb.Gettext, "errors", v))
-      end)
+      |> Enum.reduce(
+        %{},
+        fn {k, [v | _]}, acc ->
+          Map.put(acc, k, Gettext.dgettext(EzCoinsApiWeb.Gettext, "errors", v))
+        end
+      )
 
-    IO.inspect(errors)
-    message = errors |> Enum.map(fn {k, v} -> "#{k} #{v}" end) |> Enum.join(", ")
+    message =
+      errors
+      |> Enum.map(fn {k, v} -> "#{k} #{v}" end)
+      |> Enum.join(", ")
 
     [
       %{
@@ -22,6 +27,9 @@ defmodule EzCoinsApiWeb.Middlewares.HandleChangesetErrors do
       }
     ]
   end
+
+  defp handle_error(error) when is_binary(error),
+    do: [%{message: Gettext.dgettext(EzCoinsApiWeb.Gettext, "errors", error)}]
 
   defp handle_error(error), do: [error]
 end
