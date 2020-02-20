@@ -232,5 +232,38 @@ defmodule EzCoinsApi.UserResolverTest do
 
       assert resigned_user["id"] == "#{user.id}"
     end
+
+    test "resign_user with valid data and user authenticated returns unauthorized error", %{
+      admin: admin,
+      user_conn: user_conn
+    } do
+      query = """
+        mutation($input: ResignUserInputType!) {
+          resign_user(input: $input) {
+            id
+          }
+        }
+      """
+
+      variables = %{
+        input: %{
+          id: admin.id,
+          resigned_at: "2018-10-29"
+        }
+      }
+
+      %{
+        "errors" => [
+          %{
+            "message" => message
+          }
+        ]
+      } =
+        user_conn
+        |> post("/graphql", %{query: query, variables: variables})
+        |> json_response(200)
+
+      assert message == "não autorizado"
+    end
   end
 end
