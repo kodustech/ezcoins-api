@@ -1471,7 +1471,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "43",
         receiver_user_id: "30",
         quantity: 10,
-        reason: "Ajudou de forma bem rapida e clara durante a pequena participação que fiz no Camda"
+        reason:
+          "Ajudou de forma bem rapida e clara durante a pequena participação que fiz no Camda"
       },
       %{
         inserted_at: ~N[2019-10-15 00:00:00],
@@ -1611,7 +1612,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "28",
         receiver_user_id: "25",
         quantity: 5,
-        reason: "Pelo empenho e dedicação na semana dos ez.coins. Foi muito participativo e fez vários artigos. PARABÉNS mano!!!"
+        reason:
+          "Pelo empenho e dedicação na semana dos ez.coins. Foi muito participativo e fez vários artigos. PARABÉNS mano!!!"
       },
       %{
         inserted_at: ~N[2019-10-22 00:00:00],
@@ -1716,7 +1718,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "6",
         receiver_user_id: "15",
         quantity: 10,
-        reason: "Por sempre se preocupar em fazer conteúdo de qualidade pro canal e ajudar a gente a alcançar isso também "
+        reason:
+          "Por sempre se preocupar em fazer conteúdo de qualidade pro canal e ajudar a gente a alcançar isso também "
       },
       %{
         inserted_at: ~N[2019-10-25 00:00:00],
@@ -1800,7 +1803,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "21",
         receiver_user_id: "16",
         quantity: 10,
-        reason: "Fez uma call hoje comigo pra ajudar a resolver meu problema com o suporte da Salestime. Monstro atencioso!"
+        reason:
+          "Fez uma call hoje comigo pra ajudar a resolver meu problema com o suporte da Salestime. Monstro atencioso!"
       },
       %{
         inserted_at: ~N[2019-10-29 00:00:00],
@@ -1863,7 +1867,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "6",
         receiver_user_id: "23",
         quantity: 10,
-        reason: "Por sempre me ajudar e me aguentar mais um mês, além de me inserir cada vez mais no problemas da aGo"
+        reason:
+          "Por sempre me ajudar e me aguentar mais um mês, além de me inserir cada vez mais no problemas da aGo"
       },
       %{
         inserted_at: ~N[2019-10-30 00:00:00],
@@ -1954,7 +1959,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "13",
         receiver_user_id: "7",
         quantity: 20,
-        reason: "Ajuda no dia a dia, empenho na criacao de componentes fora de horario de trabalho"
+        reason:
+          "Ajuda no dia a dia, empenho na criacao de componentes fora de horario de trabalho"
       },
       %{
         inserted_at: ~N[2019-10-31 00:00:00],
@@ -2199,7 +2205,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "23",
         receiver_user_id: "30",
         quantity: 7,
-        reason: "Ajudar no direcionamento do Rodrigo com os estudos, e boa conversa sobre programação"
+        reason:
+          "Ajudar no direcionamento do Rodrigo com os estudos, e boa conversa sobre programação"
       },
       %{
         inserted_at: ~N[2019-11-08 00:00:00],
@@ -2213,7 +2220,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "6",
         receiver_user_id: "18",
         quantity: 5,
-        reason: "Por sempre estar aberto a nos ouvir e se empenhar e tornar a Ez #GreatPlaceToWork"
+        reason:
+          "Por sempre estar aberto a nos ouvir e se empenhar e tornar a Ez #GreatPlaceToWork"
       },
       %{
         inserted_at: ~N[2019-11-14 00:00:00],
@@ -2227,7 +2235,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "28",
         receiver_user_id: "15",
         quantity: 5,
-        reason: "Pelo auxílio na parte de artigos, e grande disponibilidade em ajudar. Vc é fera mlk!"
+        reason:
+          "Pelo auxílio na parte de artigos, e grande disponibilidade em ajudar. Vc é fera mlk!"
       },
       %{
         inserted_at: ~N[2019-11-22 00:00:00],
@@ -2332,7 +2341,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "6",
         receiver_user_id: "30",
         quantity: 15,
-        reason: "Por me ajudar com alguns problemas em Java e por sempre levar em conta meus comentários sobre os ez.coins"
+        reason:
+          "Por me ajudar com alguns problemas em Java e por sempre levar em conta meus comentários sobre os ez.coins"
       },
       %{
         inserted_at: ~N[2019-11-22 00:00:00],
@@ -2829,7 +2839,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "14",
         receiver_user_id: "4",
         quantity: 5,
-        reason: "Alef fez a gentileza de de trazer a parada pro Poti beber ontem na festa da Kovi (Gentileza gera gentileza man \o/)"
+        reason:
+          "Alef fez a gentileza de de trazer a parada pro Poti beber ontem na festa da Kovi (Gentileza gera gentileza man \o/)"
       },
       %{
         inserted_at: ~N[2019-12-20 00:00:00],
@@ -2962,7 +2973,8 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "21",
         receiver_user_id: "2",
         quantity: 10,
-        reason: "Pelo evento de recepção dos novos estagiários, bem como o empenho em envolver todos os membros da ez e fire"
+        reason:
+          "Pelo evento de recepção dos novos estagiários, bem como o empenho em envolver todos os membros da ez e fire"
       },
       %{
         inserted_at: ~N[2020-01-15 00:00:00],
@@ -2976,217 +2988,248 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "7",
         receiver_user_id: "4",
         quantity: 4,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "6",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "8",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "9",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "12",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "13",
         quantity: 4,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "14",
         quantity: 4,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "15",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "16",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "17",
         quantity: 4,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "18",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "21",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "20",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "22",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "23",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "25",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "28",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "2",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "31",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "30",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "32",
         quantity: 4,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "33",
         quantity: 4,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "34",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "38",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "34",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "35",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "41",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "40",
         quantity: 2,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "42",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "43",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-16 00:00:00],
         sender_user_id: "7",
         receiver_user_id: "44",
         quantity: 1,
-        reason: "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
+        reason:
+          "É uma parte importante para fazer a Ez crescer cada vez mais! Merece um 1 ponto de inicio de ano. Good Vibes"
       },
       %{
         inserted_at: ~N[2020-01-15 00:00:00],
@@ -3550,14 +3593,16 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         sender_user_id: "21",
         receiver_user_id: "20",
         quantity: 5,
-        reason: "Por ser um vendedor com um potencial absurdo que vai virar o jogo e destruir de resultados em breve!"
+        reason:
+          "Por ser um vendedor com um potencial absurdo que vai virar o jogo e destruir de resultados em breve!"
       },
       %{
         inserted_at: ~N[2020-01-17 00:00:00],
         sender_user_id: "21",
         receiver_user_id: "2",
         quantity: 10,
-        reason: "Por ser absurdamente monstra no que está fazendo e pela energia sempre positiva num ambiente tão tóxico"
+        reason:
+          "Por ser absurdamente monstra no que está fazendo e pela energia sempre positiva num ambiente tão tóxico"
       },
       %{
         inserted_at: ~N[2020-01-17 00:00:00],
@@ -4055,7 +4100,7 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         receiver_user_id: "20",
         quantity: 10,
         reason: "Arrumou o seed dos ez.coins só com a presença"
-      },
+      }
     ]
 
     map(
@@ -4070,15 +4115,15 @@ defmodule EzCoinsApi.Seeds.DonationsSeed do
         Multi.new()
         |> insert(:donation, donation)
         |> update(
-             :receiver_wallet,
-             change(
-               receiver_wallet,
-               received: receiver_wallet.received + attrs.quantity,
-               balance: receiver_wallet.balance + attrs.quantity
-             )
-           )
+          :receiver_wallet,
+          change(
+            receiver_wallet,
+            received: receiver_wallet.received + attrs.quantity,
+            balance: receiver_wallet.balance + attrs.quantity
+          )
+        )
         |> repo.transaction()
-        |> IO.inspect
+        |> IO.inspect()
       end
     )
 

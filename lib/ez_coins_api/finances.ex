@@ -43,7 +43,8 @@ defmodule EzCoinsApi.Finances do
     conditions =
       with %{receiver_user_id: receiver_user_id} <- filters,
            do:
-             if(receiver_user_id == "",
+             if(
+               receiver_user_id == "",
                do: conditions,
                else: dynamic([d], d.receiver_user_id == ^receiver_user_id and ^conditions)
              ),
@@ -52,13 +53,15 @@ defmodule EzCoinsApi.Finances do
     conditions =
       with %{sender_user_id: sender_user_id} <- filters,
            do:
-             if(sender_user_id == "",
+             if(
+               sender_user_id == "",
                do: conditions,
                else: dynamic([d], d.sender_user_id == ^sender_user_id and ^conditions)
              ),
            else: (_ -> conditions)
 
-    query |> where(^conditions)
+    query
+    |> where(^conditions)
   end
 
   @doc """
@@ -90,28 +93,35 @@ defmodule EzCoinsApi.Finances do
 
   """
   def create_donation(attrs \\ %{}) do
-    sender_wallet = get_wallet_by_owner!(attrs.sender_user_id)
+    case Donation.changeset(%Donation{}, attrs) do
+      %{valid?: valid?} when valid? == true ->
+        sender_wallet = get_wallet_by_owner!(attrs.sender_user_id)
 
-    if sender_wallet.to_offer < attrs.quantity do
-      raise "Insufficient balance to offer"
+        if sender_wallet.to_offer < attrs.quantity do
+          raise "Insufficient balance to offer"
+        end
+
+        receiver_wallet = get_wallet_by_owner!(attrs.receiver_user_id)
+
+        Multi.new()
+        |> Multi.insert(:donation, Donation.changeset(%Donation{}, attrs))
+        |> Multi.update(
+          :sender_wallet,
+          Changeset.change(sender_wallet, to_offer: sender_wallet.to_offer - attrs.quantity)
+        )
+        |> Multi.update(
+          :receiver_wallet,
+          Changeset.change(
+            receiver_wallet,
+            received: receiver_wallet.received + attrs.quantity,
+            balance: receiver_wallet.balance + attrs.quantity
+          )
+        )
+        |> Repo.transaction()
+
+      changeset ->
+        {:error, changeset}
     end
-
-    receiver_wallet = get_wallet_by_owner!(attrs.receiver_user_id)
-
-    Multi.new()
-    |> Multi.insert(:donation, Donation.changeset(%Donation{}, attrs))
-    |> Multi.update(
-      :sender_wallet,
-      Changeset.change(sender_wallet, to_offer: sender_wallet.to_offer - attrs.quantity)
-    )
-    |> Multi.update(
-      :receiver_wallet,
-      Changeset.change(receiver_wallet,
-        received: receiver_wallet.received + attrs.quantity,
-        balance: receiver_wallet.balance + attrs.quantity
-      )
-    )
-    |> Repo.transaction()
   end
 
   @doc """

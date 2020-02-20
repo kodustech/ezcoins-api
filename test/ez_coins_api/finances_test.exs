@@ -1,18 +1,57 @@
 defmodule EzCoinsApi.FinancesTest do
   use EzCoinsApi.DataCase
+  use EzCoinsApi.Fixtures, [:wallet]
 
+  alias EzCoinsApi.Accounts
   alias EzCoinsApi.Finances
 
   describe "donations" do
     alias EzCoinsApi.Finances.Donation
 
+    @sender_user_attrs %{
+      avatar: "sender avatar uri",
+      name: "sender name",
+      email: "sender@email.com",
+      password: "sender password",
+      password_confirmation: "sender password",
+      hired_at: ~D[2017-10-29]
+    }
+    @receiver_user_attrs %{
+      avatar: "receiver avatar uri",
+      name: "receiver name",
+      email: "receiver@email.com",
+      password: "receiver password",
+      password_confirmation: "receiver password",
+      hired_at: ~D[2017-10-29]
+    }
+    @wallet_attrs %{to_offer: 42}
     @valid_attrs %{quantity: 42, reason: "some reason"}
     @update_attrs %{quantity: 43, reason: "some updated reason"}
     @invalid_attrs %{quantity: nil, reason: nil}
 
     def donation_fixture(attrs \\ %{}) do
-      {:ok, donation} =
-        attrs
+      {
+        :ok,
+        %{
+          user: sender_user,
+          wallet: sender_wallet
+        }
+      } = Accounts.create_user(@sender_user_attrs)
+
+      Finances.update_wallet(sender_wallet, @wallet_attrs)
+
+      {
+        :ok,
+        %{
+          user: receiver_user,
+          wallet: receiver_wallet
+        }
+      } = Accounts.create_user(@receiver_user_attrs)
+
+      Finances.update_wallet(receiver_wallet, @wallet_attrs)
+
+      {:ok, %{donation: donation}} =
+        Enum.into(%{sender_user_id: sender_user.id, receiver_user_id: receiver_user.id}, attrs)
         |> Enum.into(@valid_attrs)
         |> Finances.create_donation()
 
@@ -30,7 +69,7 @@ defmodule EzCoinsApi.FinancesTest do
     end
 
     test "create_donation/1 with valid data creates a donation" do
-      assert {:ok, %Donation{} = donation} = Finances.create_donation(@valid_attrs)
+      donation = donation_fixture()
       assert donation.quantity == 42
       assert donation.reason == "some reason"
     end
@@ -65,20 +104,20 @@ defmodule EzCoinsApi.FinancesTest do
   end
 
   describe "wallets" do
+    alias EzCoinsApi.Accounts
     alias EzCoinsApi.Finances.Wallet
 
+    @user_attrs %{
+      avatar: "some avatar uri",
+      name: "some name",
+      email: "some@email.com",
+      password: "same password",
+      password_confirmation: "same password",
+      hired_at: ~D[2017-10-29]
+    }
     @valid_attrs %{balance: 42, received: 42, to_offer: 42}
     @update_attrs %{balance: 43, received: 43, to_offer: 43}
-    @invalid_attrs %{balance: nil, received: nil, to_offer: nil}
-
-    def wallet_fixture(attrs \\ %{}) do
-      {:ok, wallet} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Finances.create_wallet()
-
-      wallet
-    end
+    @invalid_attrs %{balance: nil, received: -42, to_offer: nil}
 
     test "list_wallets/0 returns all wallets" do
       wallet = wallet_fixture()
@@ -91,7 +130,18 @@ defmodule EzCoinsApi.FinancesTest do
     end
 
     test "create_wallet/1 with valid data creates a wallet" do
-      assert {:ok, %Wallet{} = wallet} = Finances.create_wallet(@valid_attrs)
+      {
+        :ok,
+        %{
+          user: %{
+            id: id
+          }
+        }
+      } = Accounts.create_user(@user_attrs)
+
+      assert {:ok, %Wallet{} = wallet} =
+               Finances.create_wallet(Map.put(@valid_attrs, :owner_user_id, id))
+
       assert wallet.balance == 42
       assert wallet.received == 42
       assert wallet.to_offer == 42

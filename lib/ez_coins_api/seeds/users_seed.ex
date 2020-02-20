@@ -363,7 +363,7 @@ defmodule EzCoinsApi.Seeds.UsersSeed do
         hired_at: ~D[2017-10-29],
         password: "37127973890",
         password_confirmation: "37127973890"
-      },
+      }
     ]
 
     map(
@@ -371,18 +371,18 @@ defmodule EzCoinsApi.Seeds.UsersSeed do
       fn user ->
         Multi.new()
         |> Multi.insert(
-             :user,
-             User.changeset(
-               %User{},
-               user
-             )
-           )
+          :user,
+          User.changeset(
+            %User{},
+            user
+          )
+        )
         |> Multi.run(
-             :wallet,
-             fn repo, %{user: user} ->
-               repo.insert(Wallet.changeset(%Wallet{}, %{owner_user_id: user.id}))
-             end
-           )
+          :wallet,
+          fn repo, %{user: user} ->
+            repo.insert(Wallet.changeset(%Wallet{}, %{owner_user_id: user.id}))
+          end
+        )
         |> repo.transaction()
         |> IO.inspect()
       end

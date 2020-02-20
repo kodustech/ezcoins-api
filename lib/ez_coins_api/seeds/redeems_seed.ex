@@ -93,7 +93,7 @@ defmodule EzCoinsApi.Seeds.RedeemsSeed do
         receiver_user_id: "8",
         quantity: -99,
         reason: "Resgate do prêmio Mouse Pad Gamer Dragão (70 X 35 cm)"
-      },
+      }
     ]
 
     map(
@@ -108,14 +108,14 @@ defmodule EzCoinsApi.Seeds.RedeemsSeed do
         Multi.new()
         |> insert(:donation, donation)
         |> update(
-             :receiver_wallet,
-             change(
-               receiver_wallet,
-               balance: receiver_wallet.balance + attrs.quantity
-             )
-           )
+          :receiver_wallet,
+          change(
+            receiver_wallet,
+            balance: receiver_wallet.balance + attrs.quantity
+          )
+        )
         |> repo.transaction()
-        |> IO.inspect
+        |> IO.inspect()
       end
     )
 

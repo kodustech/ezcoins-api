@@ -67,9 +67,12 @@ defmodule EzCoinsApi.Accounts do
   def create_user(attrs \\ %{}) do
     Multi.new()
     |> Multi.insert(:user, User.changeset(%User{}, attrs))
-    |> Multi.run(:wallet, fn repo, %{user: user} ->
-      repo.insert(Wallet.changeset(%Wallet{}, %{owner_user_id: user.id}))
-    end)
+    |> Multi.run(
+      :wallet,
+      fn repo, %{user: user} ->
+        repo.insert(Wallet.changeset(%Wallet{}, %{owner_user_id: user.id}))
+      end
+    )
     |> Repo.transaction()
   end
 
@@ -89,22 +92,6 @@ defmodule EzCoinsApi.Accounts do
     user
     |> User.changeset(attrs)
     |> Repo.update()
-  end
-
-  @doc """
-  Deletes a User.
-
-  ## Examples
-
-      iex> delete_user(user)
-      {:ok, %User{}}
-
-      iex> delete_user(user)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_user(%User{} = user) do
-    Repo.delete(user)
   end
 
   @doc """
