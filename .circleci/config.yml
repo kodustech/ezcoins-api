@@ -138,6 +138,21 @@ workflows:
   build-and-test:
     jobs:
       - build
+      - format_check:
+          requires:
+            - build
+      - generate_documentation:
+          requires:
+            - build
+      - dialyzer:
+          requires:
+            - build
+      - test:
+          requires:
+            - build
+      - credo:
+          requires:
+            - build
   build-and-deploy:
     jobs:
       - build_to_deploy:
@@ -153,7 +168,7 @@ workflows:
             branches:
               ignore: /.*/
           requires:
-            - build
+            - build_to_deploy
       - deploy:
           filters:
             tags:
