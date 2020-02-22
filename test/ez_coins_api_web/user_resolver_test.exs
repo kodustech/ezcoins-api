@@ -1,4 +1,4 @@
-defmodule EzCoinsApi.UserResolverTest do
+defmodule EzCoinsApiWeb.UserResolverTest do
   use EzCoinsApiWeb.ConnCase
   use EzCoinsApi.Fixtures, [:user]
 
