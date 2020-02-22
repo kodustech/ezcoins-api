@@ -188,7 +188,8 @@ defmodule EzCoinsApiWeb.UserResolverTest do
         "errors" => [
           %{
             "details" => details
-          } | _
+          }
+          | _
         ]
       } =
         admin_conn
