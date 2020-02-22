@@ -104,3 +104,7 @@ msgstr ""
 
 msgid "user don't exists"
 msgstr ""
+
+msgid "unauthorized"
+msgstr ""
+

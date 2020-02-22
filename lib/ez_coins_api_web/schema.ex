@@ -55,7 +55,8 @@ defmodule EzCoinsApiWeb.Schema do
         end
       end)
 
-      trigger(:donate,
+      trigger(
+        :donate,
         topic: fn donation ->
           [donation.sender_user_id]
         end
@@ -64,6 +65,7 @@ defmodule EzCoinsApiWeb.Schema do
   end
 
   def middleware(middleware, _field, _object) do
-    middleware ++ [EzCoinsApiWeb.Middlewares.HandleChangesetErrors]
+    (middleware ++ [EzCoinsApiWeb.Middlewares.ChangesetErrors])
+    |> Enum.map(&EzCoinsApiWeb.Middlewares.Exceptions.call/1)
   end
 end
