@@ -1,10 +1,30 @@
-defmodule EzCoinsApiWeb.Middlewares.HandleChangesetErrors do
+defmodule EzCoinsApiWeb.Middlewares.ChangesetErrors do
   @behaviour Absinthe.Middleware
   def call(resolution, _) do
     %{resolution | errors: Enum.flat_map(resolution.errors, &handle_error/1)}
   end
 
   defp handle_error(%Ecto.Changeset{} = changeset) do
+    summarized(changeset) ++ detailed(changeset)
+  end
+
+  defp detailed(%Ecto.Changeset{errors: errors}) do
+    errors
+    |> Enum.map(fn {key, {value, context}} ->
+      details =
+        context
+        |> Enum.map(fn {a, b} ->
+          %{"#{a}": b}
+        end)
+
+      [
+        message: "#{key} #{Gettext.dgettext(EzCoinsApiWeb.Gettext, "errors", value)}",
+        details: details
+      ]
+    end)
+  end
+
+  defp summarized(changeset) do
     errors =
       changeset
       |> Ecto.Changeset.traverse_errors(fn {err, _opts} -> err end)
