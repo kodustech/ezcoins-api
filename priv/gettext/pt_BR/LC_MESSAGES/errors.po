@@ -100,3 +100,7 @@ msgstr "usuário desativado"
 
 msgid "user don't exists"
 msgstr "usuário não existe"
+
+msgid "unauthorized"
+msgstr "não autorizado"
+

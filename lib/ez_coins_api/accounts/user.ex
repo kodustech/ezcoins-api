@@ -11,6 +11,7 @@ defmodule EzCoinsApi.Accounts.User do
     field :avatar, :string
     field :hired_at, :date
     field :resigned_at, :date
+    field :is_admin, :boolean, default: false
 
     timestamps()
   end
@@ -35,6 +36,11 @@ defmodule EzCoinsApi.Accounts.User do
     |> validate_confirmation(:password)
     |> unique_constraint(:email)
     |> hash_password
+  end
+
+  def changeset(user, %{is_admin: _is_admin} = attrs) do
+    user
+    |> cast(attrs, [:is_admin])
   end
 
   def changeset(user, attrs) do

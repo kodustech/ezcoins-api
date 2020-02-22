@@ -15,18 +15,54 @@ defmodule EzCoinsApiWeb.Resolvers.UserResolver do
     end
   end
 
-  def create(_, %{input: input}, _) do
-    with {:ok, result} <- Accounts.create_user(input),
-         %{user: user, wallet: wallet} <- result do
-      {:ok, Map.put(user, :wallet, wallet)}
-    else
-      {:error, _name, changeset, %{}} -> {:error, changeset}
+  def create(
+        _,
+        %{input: input},
+        %{context: context}
+      ) do
+    is_admin =
+      with %{current_user: current_user} <- context,
+           %{is_admin: is_admin} <- current_user do
+        is_admin
+      else
+        _ -> false
+      end
+
+    case is_admin do
+      true ->
+        with {:ok, result} <- Accounts.create_user(input),
+             %{user: user, wallet: wallet} <- result do
+          {:ok, Map.put(user, :wallet, wallet)}
+        else
+          {:error, _name, changeset, %{}} -> {:error, changeset}
+        end
+
+      false ->
+        {:error, "unauthorized"}
     end
   end
 
-  def resign(_, %{input: input}, _) do
-    Accounts.get_user!(input.id)
-    |> Accounts.update_user(input)
+  def resign(
+        _,
+        %{input: input},
+        %{context: context}
+      ) do
+    is_admin =
+      with %{current_user: current_user} <- context,
+           %{is_admin: is_admin} <- current_user do
+        is_admin
+      else
+        _ -> false
+      end
+
+    case is_admin do
+      true ->
+        Accounts.get_user!(input.id)
+        |> Accounts.update_user(input)
+
+      false ->
+        {:error, "unauthorized"}
+    end
   end
 
   def wallet(%{id: id}, _, _) do
