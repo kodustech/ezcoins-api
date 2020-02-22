@@ -1,4 +1,4 @@
-defmodule EzCoinsApi.UserResolverTest do
+defmodule EzCoinsApiWeb.UserResolverTest do
   use EzCoinsApiWeb.ConnCase
   use EzCoinsApi.Fixtures, [:user]
 
@@ -188,7 +188,7 @@ defmodule EzCoinsApi.UserResolverTest do
         "errors" => [
           %{
             "details" => details
-          }
+          } | _
         ]
       } =
         admin_conn
@@ -264,6 +264,40 @@ defmodule EzCoinsApi.UserResolverTest do
         |> json_response(200)
 
       assert message == "não autorizado"
+    end
+
+    test "resign_user with invalid data and admin authenticated returns fields errors", %{
+      user: user,
+      admin_conn: admin_conn
+    } do
+      query = """
+        mutation($input: ResignUserInputType!) {
+          resign_user(input: $input) {
+            id
+          }
+        }
+      """
+
+      variables = %{
+        input: %{
+          id: user.id,
+          resigned_at: "not a date"
+        }
+      }
+
+      %{
+        "errors" => [
+          %{
+            "details" => details
+          }
+          | _
+        ]
+      } =
+        admin_conn
+        |> post("/graphql", %{query: query, variables: variables})
+        |> json_response(200)
+
+      assert details["resigned_at"] == "não é válido"
     end
   end
 end
