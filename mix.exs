@@ -52,7 +52,8 @@ defmodule EzCoinsApi.MixProject do
       {:absinthe_phoenix, "~> 1.4"},
       {:guardian, "~> 2.0"},
       {:cors_plug, "~> 2.0"},
-      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev, :test], runtime: false}
+      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.21.3", only: [:dev, :test], runtime: false}
     ]
   end
 
