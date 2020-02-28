@@ -1,5 +1,6 @@
 defmodule EzCoinsApiWeb.Router do
   use EzCoinsApiWeb, :router
+  @dialyzer {:no_return, {:__checks__, 0}}
 
   pipeline :api do
     plug CORSPlug, origin: "*"

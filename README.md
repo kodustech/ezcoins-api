@@ -1,5 +1,7 @@
 # EzCoinsApi
 
+[![CircleCI](https://circleci.com/gh/maykonmichel/ezcoins-api.svg?style=svg)](https://circleci.com/gh/maykonmichel/ezcoins-api)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

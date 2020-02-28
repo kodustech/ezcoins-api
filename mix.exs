@@ -10,7 +10,11 @@ defmodule EzCoinsApi.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      dialyzer: [
+        list_unused_filters: true,
+        plt_add_apps: [:ex_unit]
+      ]
     ]
   end
 
@@ -47,7 +51,9 @@ defmodule EzCoinsApi.MixProject do
       {:absinthe_plug, "~> 1.4"},
       {:absinthe_phoenix, "~> 1.4"},
       {:guardian, "~> 2.0"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.21.3", only: [:dev, :test], runtime: false}
     ]
   end
 
