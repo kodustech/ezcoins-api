@@ -47,11 +47,13 @@ jobs:
   test:
     docker:
       - image: circleci/elixir:1.9.4
+        environment:
+          MIX_ENV: test
       - image: circleci/postgres:10.1-alpine
-          environment:
-            POSTGRES_USER: postgres
-            POSTGRES_DB: ez_coins_test
-            POSTGRES_PASSWORD: postgres
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: ez_coins_test
+          POSTGRES_PASSWORD: postgres
     steps:
       - checkout
       - restore_cache:
@@ -131,15 +133,15 @@ workflows:
       - format_check:
           requires:
             - build_test
-            - generate_documentation:
-                requires:
-                  - build_test
-            - dialyzer:
-                requires:
-                  - build_test
-            - test:
-                requires:
-                  - build_test
+      - generate_documentation:
+          requires:
+            - build_test
+      - dialyzer:
+          requires:
+            - build_test
+      - test:
+          requires:
+            - build_test
   deploy_production:
     jobs:
       - build_production:
