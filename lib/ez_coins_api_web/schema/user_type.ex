@@ -12,6 +12,7 @@ defmodule EzCoinsApiWeb.Schema.Types.UserType do
     field(:avatar, :string)
     field(:hired_at, :string)
     field(:resigned_at, :string)
+    field(:is_admin, :boolean)
     field(:wallet, :wallet_type, resolve: &UserResolver.wallet/3)
   end
 
