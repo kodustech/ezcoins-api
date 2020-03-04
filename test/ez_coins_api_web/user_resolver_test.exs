@@ -24,7 +24,8 @@ defmodule EzCoinsApiWeb.UserResolverTest do
       "name" => user.name,
       "email" => user.email,
       "hired_at" => "#{user.hired_at}",
-      "resigned_at" => user.resigned_at
+      "resigned_at" => user.resigned_at,
+      "is_admin" => user.is_admin
     }
   end
 
@@ -43,6 +44,7 @@ defmodule EzCoinsApiWeb.UserResolverTest do
             email
             hired_at
             resigned_at
+            is_admin
           }
         }
       """
@@ -73,6 +75,7 @@ defmodule EzCoinsApiWeb.UserResolverTest do
             email
             hired_at
             resigned_at
+            is_admin
           }
         }
       """
@@ -105,6 +108,7 @@ defmodule EzCoinsApiWeb.UserResolverTest do
             email
             hired_at
             resigned_at
+            is_admin
           }
         }
       """
@@ -142,6 +146,7 @@ defmodule EzCoinsApiWeb.UserResolverTest do
             email
             hired_at
             resigned_at
+            is_admin
           }
         }
       """
@@ -176,6 +181,7 @@ defmodule EzCoinsApiWeb.UserResolverTest do
             email
             hired_at
             resigned_at
+            is_admin
           }
         }
       """
