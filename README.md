@@ -1,5 +1,15 @@
 # EzCoinsApi
+## Starting the API
+To start the API using Docker:
 
+  * Start your docker with `sudo dockerd`
+  * Create a .env file based on .env.backup
+  * Start the API with `sudo docker-compose up`
+  * Get the CONTAINER ID of "container ezcoins-api_api_1" with `sudo docker container ls`
+  * Run migrations with `sudo docker container exec ID ./seeder.sh` (replace the ID with CONTAINER ID that you get)
+  * Go to [EzCoinsWeb](https://github.com/maykonmichel/ezcoins-web) to start the front-end.
+
+## Phoenix server
 [![CircleCI](https://circleci.com/gh/maykonmichel/ezcoins-api.svg?style=svg)](https://circleci.com/gh/maykonmichel/ezcoins-api)
 
 To start your Phoenix server:
